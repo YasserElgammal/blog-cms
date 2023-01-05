@@ -19,9 +19,8 @@ class Authcheck implements InvokableRule
     {
         $auth_user = Auth::user()->id;
         // security to pervent of inspect and pass another value
-        if ( $auth_user != $value) {
+        if ($auth_user != $value) {
             $fail('The :attribute must be current Auth User.');
         }
-
     }
 }

@@ -23,7 +23,6 @@ class PostController extends Controller
     {
         $posts = Post::orderBy('id', 'desc')->paginate(15);
         return view('admin.post.index', compact('posts'));
-
     }
 
     /**
@@ -47,7 +46,7 @@ class PostController extends Controller
     {
         $post_data = $request->safe()->except('image');
 
-        if($request->hasfile('image')){
+        if ($request->hasfile('image')) {
             $get_file = $request->file('image')->store('images/posts');
             $post_data['image'] = $get_file;
         }
@@ -57,7 +56,7 @@ class PostController extends Controller
         // dd($post_data);
         Post::create($post_data);
 
-        return to_route('admin.post.index')->with('message','Post Created');
+        return to_route('admin.post.index')->with('message', 'Post Created');
         // dd($post);
     }
 
@@ -95,7 +94,7 @@ class PostController extends Controller
     {
         $post_data = $request->safe()->except('image');
 
-        if($request->hasfile('image')){
+        if ($request->hasfile('image')) {
             Storage::delete($post->image);
             $get_file = $request->file('image')->store('images/posts');
             $post_data['image'] = $get_file;
@@ -103,7 +102,7 @@ class PostController extends Controller
 
         $post_data['user_id'] = Auth()->user()->id;
         $post->update($post_data);
-        return to_route('admin.post.index')->with('message','Post Updated');
+        return to_route('admin.post.index')->with('message', 'Post Updated');
     }
 
     /**
@@ -114,7 +113,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        if($post->image != null){
+        if ($post->image != null) {
             Storage::delete($post->image);
         }
 
@@ -125,12 +124,11 @@ class PostController extends Controller
     public function getSlug(Request $request)
     {
         $slug = str($request->title)->slug();
-        if (Post::where('slug', $slug )->exists()) {
+        if (Post::where('slug', $slug)->exists()) {
             $slug = $slug . '-' . Str::random(2);
             return response()->json(['slug' => $slug]);
-        }else{
+        } else {
             return response()->json(['slug' => $slug]);
         }
     }
-    
 }

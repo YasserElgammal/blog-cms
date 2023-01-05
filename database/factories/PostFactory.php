@@ -24,7 +24,7 @@ class PostFactory extends Factory
         $slug = str($title)->slug();
         return [
             'user_id' => User::factory(),
-            // 'cat_id' => rand(1,3),
+            'cat_id' => rand(1,4),
             'title' => $title,
             'content' => fake()->paragraph(),
             'status' => fake()->boolean(),

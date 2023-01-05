@@ -25,8 +25,9 @@ class StoreCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required','unique:categories','min:3','max:15'],
-            'user_id' => ['required','exists:users,id', new Authcheck]
+            'name' => ['required', 'unique:categories', 'min:3', 'max:25'],
+            'slug' => ['required', 'unique:categories'],
+            'user_id' => ['required', 'exists:users,id', new Authcheck]
         ];
     }
 }

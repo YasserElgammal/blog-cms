@@ -4,26 +4,27 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Support\Facades\Auth;
 
 class Category extends Model
 {
     use HasFactory;
-    protected $fillable = ['name','user_id'];
+    protected $fillable = ['name', 'slug', 'user_id'];
 
-    public function setUser_IdAttribute($user)
-    {
-        $this->attributes['user_id'] = Auth::user()->id;
-    }
-
+    // One to many realtionship
     public function posts()
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Post::class, 'cat_id', 'id');
     }
 
+    // One to many realtionship -> Users has many categories
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    // I use this function to get Active Posts in the current category
+    public function publishedPosts()
+    {
+        return SELF::posts()->whereStatus(true)->orderBy('id','desc')->paginate(10);
     }
 }

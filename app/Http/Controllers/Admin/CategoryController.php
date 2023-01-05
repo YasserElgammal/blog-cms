@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -37,10 +39,10 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCategoryRequest $cat_request)
+    public function store(StoreCategoryRequest $request)
     {
-        $vaildate = $cat_request->validated();
-        Category::create($vaildate);
+        $validate = $request->validated();
+        Category::create($validate);
 
         return to_route('admin.category.index')->with('message', 'Category Created');
     }
@@ -74,9 +76,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreCategoryRequest $cat_request, Category $category)
+    public function update(UpdateCategoryRequest $request, Category $category)
     {
-        $vaildated = $cat_request->validated();
+        $vaildated = $request->validated();
         $category->update($vaildated);
 
         return to_route('admin.category.index')->with('message', 'Category Updated');
@@ -92,5 +94,16 @@ class CategoryController extends Controller
     {
         $category->delete();
         return to_route('admin.category.index')->with('message', 'Category Deleted !');
+    }
+
+    public function getSlug(Request $request)
+    {
+        $slug = str($request->name)->slug();
+        if (Category::where('slug', $slug)->exists()) {
+            $slug = $slug . '-' . Str::random(2);
+            return response()->json(['slug' => $slug]);
+        } else {
+            return response()->json(['slug' => $slug]);
+        }
     }
 }

@@ -7,10 +7,8 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    public function index(){
-
-        // $auth_user = Auth::user()->name;
-
+    public function index()
+    {
         return view('admin.index');
     }
 }
