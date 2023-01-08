@@ -2,8 +2,13 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController as FrontPostController;
+use App\Http\Controllers\CategoryController as FrontCategoryController;
+use App\Http\Controllers\PageController as FrontPageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,8 +25,9 @@ use Illuminate\Support\Facades\Route;
 
 // FrontEnd Routes
 Route::get('/', [HomeController::class, 'index'])->name('webhome');
-Route::get('/post/{slug}', [HomeController::class, 'getPostBySlug'])->name('post.show');
-Route::get('/category/{slug}', [HomeController::class, 'getCategoryBySlug'])->name('category.show');
+Route::get('/post/{slug}', [FrontPostController::class, 'getPostBySlug'])->name('post.show');
+Route::get('/category/{slug}', [FrontCategoryController::class, 'getCategoryBySlug'])->name('category.show');
+Route::get('/page/{slug}', [FrontPageController::class, 'getPageBySlug'])->name('page.show');
 
 
 
@@ -41,6 +47,9 @@ Route::name('admin.')->prefix('/admin')->group(function () {
     Route::resource('/category', CategoryController::class);
     Route::get('/post/slug-get', [PostController::class, 'getSlug'])->name('post.getslug');
     Route::resource('/post', PostController::class);
+    Route::get('/page/slug-get', [PageController::class, 'getSlug'])->name('page.getslug');
+    Route::resource('/page', PageController::class);
+    Route::resource('/setting', SettingController::class, ['only' => ['index', 'update']]);
 });
 
 require __DIR__ . '/auth.php';

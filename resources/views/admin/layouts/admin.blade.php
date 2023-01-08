@@ -75,12 +75,22 @@
             <a href="{{ route('admin.category.index') }}"
                 class="{{ request()->routeIs('*.category.*') ? 'active-nav-link' : 'opacity-75 hover:opacity-100' }} flex items-center text-white py-4 pl-6 nav-item">
                 <i class="fas fa-sticky-note mr-3"></i>
-            Categories
+                Categories
             </a>
             <a href="{{ route('admin.post.index') }}"
                 class="{{ request()->routeIs('*.post.*') ? 'active-nav-link' : 'opacity-75 hover:opacity-100' }} flex items-center text-white  py-4 pl-6 nav-item">
                 <i class="fas fa-table mr-3"></i>
                 Posts
+            </a>
+            <a href="{{ route('admin.page.index') }}"
+                class="{{ request()->routeIs('*.page.*') ? 'active-nav-link' : 'opacity-75 hover:opacity-100' }} flex items-center text-white  py-4 pl-6 nav-item">
+                <i class="fas fa-table mr-3"></i>
+                Pages
+            </a>
+            <a href="{{ route('admin.setting.index') }}"
+                class="{{ request()->routeIs('*.setting.*') ? 'active-nav-link' : 'opacity-75 hover:opacity-100' }} flex items-center text-white  py-4 pl-6 nav-item">
+                <i class="fas fa-table mr-3"></i>
+                Settings
             </a>
 
             {{-- <a href="{{ route('admin.user.index')}}" class="flex items-center text-white {{ (request()->routeIs('*.user.index')) ? 'active-nav-link' : 'opacity-75 hover:opacity-100' }} py-4 pl-6 nav-item">
@@ -278,10 +288,10 @@
         </script>
     @endif
 
-    @if (request()->routeIs('*.category.create'))
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
-    integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    @if (request()->routeIs('*.category.create') || request()->routeIs('*.category.edit') )
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+            integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
         <script>
             $('#name').change(function(e) {
@@ -295,6 +305,42 @@
             });
         </script>
     @endif
+
+    @if (request()->routeIs('*.page.create') || request()->routeIs('*.page.edit') )
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+        integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        $('#name').change(function(e) {
+            $.get('{{ route('admin.page.getslug') }}', {
+                    'name': $(this).val()
+                },
+                function(data) {
+                    $('#slug').val(data.slug);
+                }
+            );
+        });
+    </script>
+           <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+    <script>
+        $('#summernote').summernote({
+            placeholder: 'Hello ..!',
+            tabsize: 2,
+            height: 120,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'video']],
+                ['view', ['codeview', 'help']]
+            ]
+        });
+    </script>
+@endif
 
 </body>
 

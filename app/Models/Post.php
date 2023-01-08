@@ -21,11 +21,11 @@ class Post extends Model
     }
 
     public function getNextAttribute(){
-        return static::where('id', '>', $this->id)->whereStatus(true)->orderBy('id','asc')->first();
+        return static::wherecatId($this->cat_id)->where('id', '>', $this->id)->whereStatus(true)->orderBy('id','asc')->first();
     }
 
     public function getPreviousAttribute(){
-        return static::where('id', '<', $this->id)->whereStatus(true)->orderBy('id','desc')->first();
+        return static::wherecatId($this->cat_id)->where('id', '<', $this->id)->whereStatus(true)->orderBy('id','desc')->first();
     }
 
     public function category()

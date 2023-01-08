@@ -57,7 +57,6 @@ class PostController extends Controller
         Post::create($post_data);
 
         return to_route('admin.post.index')->with('message', 'Post Created');
-        // dd($post);
     }
 
     /**
