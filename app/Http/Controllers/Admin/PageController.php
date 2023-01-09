@@ -37,6 +37,12 @@ class PageController extends Controller
         return view('admin.page.edit', compact('page'));
     }
 
+    public function destroy(Page $page)
+    {
+        $page->delete();
+        return back()->with('message', 'Page Deleted');
+    }
+
     public function getSlug(Request $request)
     {
         $slug = str($request->name)->slug();

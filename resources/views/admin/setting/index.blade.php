@@ -8,7 +8,11 @@
                 <p class="text-xl pb-3 flex items-center">
                     <i class="fas fa-list mr-3"></i> Settings Details
                 </p>
-                <div class="w-full bg-white text-left p-4">Last Edit was at {{ $setting->updated_at }}</div>
+                
+                @if ($setting->updated_at != null)
+                <div class="w-full bg-white text-left p-4 mb-2">Last Edit was at {{ $setting->updated_at }}</div>
+                @endif
+
                 <form method="POST" action="{{ route('admin.setting.update', $setting->id) }}">
                     @csrf
                     @method('PUT')
