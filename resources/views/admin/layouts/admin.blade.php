@@ -79,28 +79,33 @@
             </a>
             <a href="{{ route('admin.post.index') }}"
                 class="{{ request()->routeIs('*.post.*') ? 'active-nav-link' : 'opacity-75 hover:opacity-100' }} flex items-center text-white  py-4 pl-6 nav-item">
-                <i class="fas fa-table mr-3"></i>
+                <i class="fas fa-newspaper mr-3"></i>
                 Posts
             </a>
+            <a href="{{ route('admin.tag.index') }}"
+            class="{{ request()->routeIs('*.tag.*') ? 'active-nav-link' : 'opacity-75 hover:opacity-100' }} flex items-center text-white  py-4 pl-6 nav-item">
+            <i class="fas fa-tag mr-3"></i>
+            Tags
+        </a>
             <a href="{{ route('admin.page.index') }}"
                 class="{{ request()->routeIs('*.page.*') ? 'active-nav-link' : 'opacity-75 hover:opacity-100' }} flex items-center text-white  py-4 pl-6 nav-item">
-                <i class="fas fa-table mr-3"></i>
+                <i class="far fa-file mr-3"></i>
                 Pages
             </a>
             <a href="{{ route('admin.setting.index') }}"
                 class="{{ request()->routeIs('*.setting.*') ? 'active-nav-link' : 'opacity-75 hover:opacity-100' }} flex items-center text-white  py-4 pl-6 nav-item">
-                <i class="fas fa-table mr-3"></i>
+                <i class="fas fa-wrench mr-3"></i>
                 Settings
             </a>
 
         </nav>
         <form method="POST" action="{{ route('logout') }}">
             @csrf
-        <button
-            class="absolute w-full upgrade-btn bottom-0 active-nav-link text-white flex items-center justify-center py-4">
-            <i class="fas fa-arrow-circle-left mr-3"></i>
-            Sign Out
-        </button>
+            <button
+                class="absolute w-full upgrade-btn bottom-0 active-nav-link text-white flex items-center justify-center py-4">
+                <i class="fas fa-arrow-circle-left mr-3"></i>
+                Sign Out
+            </button>
         </form>
     </aside>
 
@@ -137,7 +142,7 @@
                     <a href="#" class="block px-4 py-2 account-link hover:text-white">Support</a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                    <button class="block px-4 py-2 account-link hover:text-white w-full text-left">Sign Out</button>
+                        <button class="block px-4 py-2 account-link hover:text-white w-full text-left">Sign Out</button>
                     </form>
                 </div>
             </div>
@@ -169,6 +174,11 @@
                     <i class="fas fa-table mr-3"></i>
                     Posts
                 </a>
+                <a href="{{ route('admin.tag.index') }}"
+                    class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    <i class="fas fa-align-left mr-3"></i>
+                    Tags
+                </a>
                 <a href="{{ route('admin.page.index') }}"
                     class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
                     <i class="fas fa-align-left mr-3"></i>
@@ -181,11 +191,11 @@
                 </a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                <button
-                    class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item w-full text-left">
-                    <i class="fas fa-sign-out-alt mr-3"></i>
-                    Sign Out
-            </button>
+                    <button
+                        class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item w-full text-left">
+                        <i class="fas fa-sign-out-alt mr-3"></i>
+                        Sign Out
+                    </button>
                 </form>
                 {{-- <button class="w-full bg-white cta-btn font-semibold py-2 mt-3 rounded-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
                     <i class="fas fa-arrow-circle-up mr-3"></i> Upgrade to Pro!
@@ -270,7 +280,7 @@
         </script>
     @endif
 
-    @if (request()->routeIs('*.category.create') || request()->routeIs('*.category.edit') )
+    @if (request()->routeIs('*.category.create') || request()->routeIs('*.category.edit'))
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
             integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -288,41 +298,41 @@
         </script>
     @endif
 
-    @if (request()->routeIs('*.page.create') || request()->routeIs('*.page.edit') )
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
-        integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    @if (request()->routeIs('*.page.create') || request()->routeIs('*.page.edit'))
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+            integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <script>
-        $('#name').change(function(e) {
-            $.get('{{ route('admin.page.getslug') }}', {
-                    'name': $(this).val()
-                },
-                function(data) {
-                    $('#slug').val(data.slug);
-                }
-            );
-        });
-    </script>
-           <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+        <script>
+            $('#name').change(function(e) {
+                $.get('{{ route('admin.page.getslug') }}', {
+                        'name': $(this).val()
+                    },
+                    function(data) {
+                        $('#slug').val(data.slug);
+                    }
+                );
+            });
+        </script>
+        <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-    <script>
-        $('#summernote').summernote({
-            placeholder: 'Hello ..!',
-            tabsize: 2,
-            height: 120,
-            toolbar: [
-                ['style', ['style']],
-                ['font', ['bold', 'underline', 'clear']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['table', ['table']],
-                ['insert', ['link', 'video']],
-                ['view', ['codeview', 'help']]
-            ]
-        });
-    </script>
-@endif
+        <script>
+            $('#summernote').summernote({
+                placeholder: 'Hello ..!',
+                tabsize: 2,
+                height: 120,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'video']],
+                    ['view', ['codeview', 'help']]
+                ]
+            });
+        </script>
+    @endif
 
 </body>
 

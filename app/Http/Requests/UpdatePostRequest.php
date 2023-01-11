@@ -30,7 +30,8 @@ class UpdatePostRequest extends FormRequest
             'cat_id' => ['required', 'exists:categories,id'],
             'slug' => ['required', Rule::unique('posts')->ignore($this->post->id)],
             'status' => ['required', 'boolean'],
-            'image' => ['image', 'mimes:jpeg,png,jpg', 'max:2048']
+            'image' => ['image', 'mimes:jpeg,png,jpg', 'max:2048'],
+            'tags' => ['exists:tags,id']
         ];
     }
 }

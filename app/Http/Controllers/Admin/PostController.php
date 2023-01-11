@@ -7,6 +7,7 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -33,7 +34,8 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.post.create', compact('categories'));
+        $tags = Tag::all();
+        return view('admin.post.create', compact('categories', 'tags'));
     }
 
     /**
@@ -53,8 +55,14 @@ class PostController extends Controller
 
         $post_data['user_id'] = Auth()->user()->id;
 
-        // dd($post_data);
-        Post::create($post_data);
+        // dd($request->tags);
+        $post = Post::create($post_data);
+
+        if($request->has('tags')){
+            // $validate_tags = $request->validate(['tags'=> ['exists:tags,id']]);
+            $post->tags()->attach($request->tags);
+            // dd($post);
+        }
 
         return to_route('admin.post.index')->with('message', 'Post Created');
     }
@@ -79,7 +87,8 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::all();
-        return view('admin.post.edit', compact('post', 'categories'));
+        $tags = Tag::all();
+        return view('admin.post.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -101,6 +110,8 @@ class PostController extends Controller
 
         $post_data['user_id'] = Auth()->user()->id;
         $post->update($post_data);
+        $post->tags()->sync($request->tags);
+
         return to_route('admin.post.index')->with('message', 'Post Updated');
     }
 
@@ -115,7 +126,7 @@ class PostController extends Controller
         if ($post->image != null) {
             Storage::delete($post->image);
         }
-
+        $post->tags()->detach();
         $post->delete();
         return back()->with('message', 'Post Deleted');
     }
