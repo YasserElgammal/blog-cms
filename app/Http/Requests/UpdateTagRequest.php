@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateTagRequest extends FormRequest
@@ -24,7 +25,7 @@ class UpdateTagRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'min:3', 'max:25', Rule::unique('categories')->ignore($this->category->id)],
+            'name' => ['required', 'min:3', 'max:25', Rule::unique('tags')->ignore($this->tag->id)],
         ];
     }
 }

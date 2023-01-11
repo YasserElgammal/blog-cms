@@ -27,7 +27,7 @@
                                 <td class="py-4 px-6 border-b border-grey-light">{{ $tag->posts->count() }}</td>
                                 <td class="py-4 px-6 border-b border-grey-light">
 
-                                    <button class="px-4 py-1 text-white font-light tracking-wider bg-green-600 rounded" type="button"  onclick="location.href='{{ route('admin.category.edit', $tag->id) }}';">Edit</button>
+                                    <button class="px-4 py-1 text-white font-light tracking-wider bg-green-600 rounded" type="button"  onclick="location.href='{{ route('admin.tag.edit', $tag->id) }}';">Edit</button>
                                     <form type="submit" method="POST" style="display: inline" action="{{ route('admin.tag.destroy', $tag->id)}}" onsubmit="return confirm('Are you sure?')">
                                         @csrf
                                         @method('DELETE')
