@@ -11,6 +11,7 @@ use App\Http\Controllers\PostController as FrontPostController;
 use App\Http\Controllers\CategoryController as FrontCategoryController;
 use App\Http\Controllers\PageController as FrontPageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TagController as FrontTagController;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,7 @@ Route::get('/', [HomeController::class, 'index'])->name('webhome');
 Route::get('/post/{slug}', [FrontPostController::class, 'getPostBySlug'])->name('post.show');
 Route::get('/category/{slug}', [FrontCategoryController::class, 'getCategoryBySlug'])->name('category.show');
 Route::get('/page/{slug}', [FrontPageController::class, 'getPageBySlug'])->name('page.show');
+Route::get('/tag/{slug}', [FrontTagController::class, 'getPostsPerTags'])->name('tag.show');
 
 
 

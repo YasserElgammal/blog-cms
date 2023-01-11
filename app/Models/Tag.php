@@ -14,4 +14,10 @@ class Tag extends Model
     {
         return $this->belongsToMany(Post::class);
     }
+
+    // I use this function to get Active Posts in the current Tag
+    public function publishedPosts()
+    {
+        return SELF::posts()->whereStatus(true)->orderBy('id', 'desc')->paginate(10);
+    }
 }

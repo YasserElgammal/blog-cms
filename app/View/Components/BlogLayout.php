@@ -5,6 +5,7 @@ namespace App\View\Components;
 use App\Models\Category;
 use App\Models\Page;
 use App\Models\Setting;
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\View\Component;
 
@@ -32,7 +33,8 @@ class BlogLayout extends Component
         $setting = Setting::first();
         $pages_nav = Page::select('id', 'name', 'slug')->whereNavbar(true)->orderBy('id','desc')->get();
         $pages_footer = Page::select('id', 'name', 'slug')->whereFooter(true)->orderBy('id','desc')->get();
+        $tags = Tag::all();
         // dd($top_users);
-        return view('layouts.blog', compact('categories', 'top_users', 'setting', 'pages_nav', 'pages_footer'));
+        return view('layouts.blog', compact('categories', 'top_users', 'setting', 'pages_nav', 'pages_footer', 'tags'));
     }
 }

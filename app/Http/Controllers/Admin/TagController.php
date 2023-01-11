@@ -79,7 +79,6 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        $tag->posts()->detach();
         $tag->delete();
         return to_route('admin.tag.index')->with('message', 'Tag Deleted !');
     }

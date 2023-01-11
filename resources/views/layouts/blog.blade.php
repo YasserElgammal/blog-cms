@@ -31,7 +31,8 @@
             <nav>
                 <ul class="flex items-center justify-between font-bold text-sm text-white uppercase no-underline">
                     @foreach ($pages_nav as $page)
-                    <li><a class="hover:text-gray-200 hover:underline px-4" href="{{ $page->slug }}">{{ $page->name }}</a></li>
+                        <li><a class="hover:text-gray-200 hover:underline px-4"
+                                href="{{ $page->slug }}">{{ $page->name }}</a></li>
                     @endforeach
                 </ul>
             </nav>
@@ -107,6 +108,23 @@
             </div>
 
             <div class="w-full bg-white shadow flex flex-col my-4 p-6">
+                <p class="text-xl font-semibold pb-5">Tags</p>
+                <div class="flex flex-wrap">
+
+                    @forelse ($tags as $tag)
+                        <a href="{{ route('tag.show', $tag->name) }}"
+                            class="flex justify-center items-center m-1 font-medium py-1 px-2 bg-white rounded-full text-blue-700 bg-blue-100 border border-blue-300 ">
+                            <div class="p-1.5 text-xs font-normal leading-none max-w-full flex-initial">
+                                {{ $tag->name }}</div>
+                        </a>
+                    @empty
+                        No Tags !
+                    @endforelse
+
+                </div>
+            </div>
+
+            <div class="w-full bg-white shadow flex flex-col my-4 p-6">
                 <p class="text-xl font-semibold pb-5">Top Writers</p>
                 {{--  --}}
                 <div class="content flex justify-between py-2 w-full">
@@ -144,7 +162,7 @@
         <div class="w-full container mx-auto flex flex-col items-center">
             <div class="flex flex-col md:flex-row text-center md:text-left md:justify-between py-6">
                 @foreach ($pages_footer as $page)
-                <a href="{{ $page->slug }}" class="uppercase px-3 hover:text-blue-700">{{ $page->name }}</a>
+                    <a href="{{ $page->slug }}" class="uppercase px-3 hover:text-blue-700">{{ $page->name }}</a>
                 @endforeach
             </div>
             <div class="uppercase pb-6">&copy; {{ $setting->copy_rights }}</div>

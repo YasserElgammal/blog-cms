@@ -126,7 +126,6 @@ class PostController extends Controller
         if ($post->image != null) {
             Storage::delete($post->image);
         }
-        $post->tags()->detach();
         $post->delete();
         return back()->with('message', 'Post Deleted');
     }

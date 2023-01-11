@@ -8,7 +8,7 @@
                 <p class="text-xl pb-3 flex items-center">
                     <i class="fas fa-list mr-3"></i> Tags Records
                 </p>
-                <button class="px-4 py-1 text-white font-light tracking-wider bg-blue-600 rounded mb-2" onclick="location.href='{{ route('admin.category.create') }}';">Add Category</button>
+                <button class="px-4 py-1 text-white font-light tracking-wider bg-blue-600 rounded mb-2" onclick="location.href='{{ route('admin.tag.create') }}';">Add Tag</button>
                 <div class="bg-white overflow-auto">
                     <table class="text-left w-full border-collapse">
                         <thead>
