@@ -32,7 +32,7 @@
                 <ul class="flex items-center justify-between font-bold text-sm text-white uppercase no-underline">
                     @foreach ($pages_nav as $page)
                         <li><a class="hover:text-gray-200 hover:underline px-4"
-                                href="{{ $page->slug }}">{{ $page->name }}</a></li>
+                                href="{{ route('page.show',$page->slug) }}">{{ $page->name }}</a></li>
                     @endforeach
                 </ul>
             </nav>
@@ -96,6 +96,7 @@
         {{ $slot }}
 
         <!-- Sidebar Section -->
+        @if (!request()->routeIs('page.show'))
         <aside class="w-full md:w-1/3 flex flex-col items-center px-3">
 
             <div class="w-full bg-white shadow flex flex-col my-4 p-6">
@@ -111,15 +112,19 @@
                 <p class="text-xl font-semibold pb-5">Tags</p>
                 <div class="flex flex-wrap">
 
-                    @forelse ($tags as $tag)
-                        <a href="{{ route('tag.show', $tag->name) }}"
-                            class="flex justify-center items-center m-1 font-medium py-1 px-2 bg-white rounded-full text-blue-700 bg-blue-100 border border-blue-300 ">
-                            <div class="p-1.5 text-xs font-normal leading-none max-w-full flex-initial">
-                                {{ $tag->name }}</div>
-                        </a>
-                    @empty
-                        No Tags !
-                    @endforelse
+                    @foreach ($tags as $tag)
+
+                    @if ($tag->countTagsForPublishedPosts() >= 1)
+
+                    <a href="{{ route('tag.show', $tag->name) }}"
+                        class="flex justify-center items-center m-1 font-medium py-1 px-2 bg-white rounded-full text-blue-700 bg-blue-100 border border-blue-300 ">
+                        <div class="p-1.5 text-xs font-normal leading-none max-w-full flex-initial">
+                            {{ $tag->name }}</div>
+                    </a>
+
+                    @endif
+
+                    @endforeach
 
                 </div>
             </div>
@@ -138,8 +143,11 @@
                 </div>
                 @forelse ($top_users as $top)
                     <div class="my-1.5 py-3	px-4 flex justify-center rounded-lg shadow-lg bg-white w-full ">
-                        <img class="w-10 h-10 rounded-full"
-                            src="https://source.unsplash.com/collection/1346951/150x150?sig=1" alt="">
+                        @if ($top->avatar == null)
+                        <img src="{{ asset('import/assets/profile-pic-dummy.png') }}" class="w-10 h-10 rounded-full">
+                        @else
+                        <img class="w-10 h-10 rounded-full" src="{{ asset("storage/$top->avatar") }}" alt="">
+                        @endif
                         <div class="content flex justify-between py-2 w-full">
                             <div class="px-2 justify-between">
                                 {{ $top->name }}
@@ -148,12 +156,15 @@
                                 {{ $top->posts_count }}
                             </div>
                         </div>
+                    </div>
                     @empty
                         No Members !
                 @endforelse
             </div>
 
         </aside>
+        @endif
+
 
     </div>
 

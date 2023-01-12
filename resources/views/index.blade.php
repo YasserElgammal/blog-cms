@@ -9,7 +9,7 @@
             <a href="{{ route('post.show', $post->slug ) }}" class="hover:opacity-75">
             {{-- just for testing --}}
             @if ($post->image == 'dummy.jpg')
-            <img src="https://source.unsplash.com/collection/1346951/1000x500?sig=1">
+            <img src="{{ asset('import/assets/post-pic-dummy.png') }}">
             @else
             <img src="{{ asset("storage/$post->image") }}" width="1000" height="500">
             @endif
@@ -20,7 +20,7 @@
                 <p href="#" class="text-sm pb-1">
                     By <a href="#" class="font-semibold hover:text-gray-800">{{ $post->user->name }}</a>, Published on {{ $post->created_at }}
                 </p>
-                <p class="pb-3">{!! substr($post->content, 0, 20) !!} ...</p>
+                <p class="pb-3">{!! substr($post->content, 0, 100) !!} ...</p>
                 {{-- <br /> --}}
                 <a href="{{ route('post.show', $post->slug) }}" class="mt-px uppercase text-gray-800 font-bold hover:text-black">Continue Reading <i class="fas fa-arrow-right"></i></a>
             </div>

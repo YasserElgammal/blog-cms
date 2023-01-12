@@ -20,4 +20,9 @@ class Tag extends Model
     {
         return SELF::posts()->whereStatus(true)->orderBy('id', 'desc')->paginate(10);
     }
+
+    public function countTagsForPublishedPosts()
+    {
+        return SELF::publishedPosts()->count();
+    }
 }

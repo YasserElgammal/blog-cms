@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('role_id')->default(4);
+            $table->foreignId('role_id')->default(3)->constrained('roles')->onDelete('cascade');
             $table->string('bio')->nullable();
             $table->string('avatar')->nullable();
             $table->string('url_fb')->nullable();

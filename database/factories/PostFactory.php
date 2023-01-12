@@ -23,10 +23,10 @@ class PostFactory extends Factory
         $title = fake()->sentence();
         $slug = str($title)->slug();
         return [
-            'user_id' => User::factory(),
-            'cat_id' => rand(1,4),
+            'user_id' => rand(1,10),
+            'cat_id' => rand(1,5),
             'title' => $title,
-            'content' => fake()->paragraph(),
+            'content' => fake()->paragraph(6),
             'status' => fake()->boolean(),
             'slug' => $slug,
             'image' => 'dummy.jpg',

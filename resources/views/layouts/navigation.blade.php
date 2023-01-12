@@ -34,6 +34,12 @@
                     </x-slot>
 
                     <x-slot name="content">
+                        @can('admin-login')
+                        <x-dropdown-link :href="route('admin.index')">
+                            Control Panel
+                        </x-dropdown-link>
+                        @endcan
+                        {{-- @endcan --}}
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
                         </x-dropdown-link>
@@ -71,6 +77,7 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>
+
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
