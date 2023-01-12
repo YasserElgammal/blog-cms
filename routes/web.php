@@ -43,23 +43,23 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth','can:admin-login'])->name('admin.')->prefix('/admin')->group(function () {
+Route::middleware(['auth', 'can:admin-login'])->name('admin.')->prefix('/admin')->group(function () {
     // This Roles can manage with Admin & Writers with specific policies.
     Route::get('/', [AdminController::class, 'index'])->name('index');
-    Route::get('/category/slug-get', [CategoryController::class, 'getSlug'])->name('category.getslug');
-    Route::resource('/category', CategoryController::class);
+    Route::get('/post/search', [PostController::class,'search'])->name('post.search');
     Route::get('/post/slug-get', [PostController::class, 'getSlug'])->name('post.getslug');
     Route::resource('/post', PostController::class);
-    Route::get('/page/slug-get', [PageController::class, 'getSlug'])->name('page.getslug');
-    Route::resource('/page', PageController::class);
     Route::resource('/tag', TagController::class);
     // Special To Admin Role Only
     Route::middleware(['can:admin-only'])->group(function () {
-    Route::resource('/role', RoleController::class, ['only' => ['index']]);
-    Route::resource('/user', UserController::class, ['except' => ['create', 'store', 'show']]);
-    Route::resource('/setting', SettingController::class, ['only' => ['index', 'update']]);
-});
-
+        Route::get('/category/slug-get', [CategoryController::class, 'getSlug'])->name('category.getslug');
+        Route::resource('/category', CategoryController::class);
+        Route::get('/page/slug-get', [PageController::class, 'getSlug'])->name('page.getslug');
+        Route::resource('/page', PageController::class);
+        Route::resource('/role', RoleController::class, ['only' => ['index']]);
+        Route::resource('/user', UserController::class, ['except' => ['create', 'store', 'show']]);
+        Route::resource('/setting', SettingController::class, ['only' => ['index', 'update']]);
+    });
 });
 
 require __DIR__ . '/auth.php';

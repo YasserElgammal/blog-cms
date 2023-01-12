@@ -6,12 +6,10 @@
 
             <div class="w-full mt-12">
                 <p class="text-xl pb-3 flex items-center">
-                    <i class="fas fa-list mr-3"></i> Posts Records
+                    <i class="fas fa-list mr-3"></i> Search Results
                 </p>
-                @can('create', 'App\Models\Post')
-                    <button class="px-4 py-1 text-white font-light tracking-wider bg-blue-600 rounded mb-2"
-                        onclick="location.href='{{ route('admin.post.create') }}';">Add Post</button>
-                @endcan
+                @if($posts->isNotEmpty())
+                <div class="w-full bg-white text-left p-4 mb-2">Found {{ $posts->total() }} Records in Posts</div>
                 <div class="bg-white overflow-auto">
                     <table class="text-left w-full border-collapse">
                         <thead>
@@ -84,6 +82,9 @@
                     </table>
                 </div>
                 {!! $posts->links() !!}
+                @else
+                <div class="w-full bg-red-500 text-left p-4 mb-2 text-white">Sorry No Results Founded, try again..</div>
+                @endif
         </main>
     </div>
 </x-admin-layout>

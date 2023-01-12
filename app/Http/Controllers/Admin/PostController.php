@@ -15,6 +15,10 @@ use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Post::class, 'post');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -58,24 +62,13 @@ class PostController extends Controller
         // dd($request->tags);
         $post = Post::create($post_data);
 
-        if($request->has('tags')){
+        if ($request->has('tags')) {
             // $validate_tags = $request->validate(['tags'=> ['exists:tags,id']]);
             $post->tags()->attach($request->tags);
             // dd($post);
         }
 
         return to_route('admin.post.index')->with('message', 'Post Created');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -139,5 +132,19 @@ class PostController extends Controller
         } else {
             return response()->json(['slug' => $slug]);
         }
+    }
+
+    public function search(Request $request)
+    {
+        $searched_text = $request->input('search');
+
+        $posts = Post::query()
+        ->where('title', 'LIKE', "%{$searched_text}%")
+        ->orWhere('content', 'LIKE', "%{$searched_text}%")
+        ->paginate(10);
+
+    // Return the search view with the resluts
+    return view('admin.post.search', compact('posts'));
+
     }
 }

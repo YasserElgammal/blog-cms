@@ -14,7 +14,7 @@
                             <tr>
                                 <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">ID</th>
                                 <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Name</th>
-                                <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Used Count</th>
+                                <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Role Name</th>
                                 <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Manage</th>
                             </tr>
                         </thead>
@@ -39,6 +39,7 @@
                         </tbody>
                     </table>
                 </div>
+                {!! $users->links() !!}
         </main>
     </div>
 </x-admin-layout>
