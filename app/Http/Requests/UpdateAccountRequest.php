@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateSettingRequest extends FormRequest
+class UpdateAccountRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,14 +24,12 @@ class UpdateSettingRequest extends FormRequest
     public function rules()
     {
         return [
-            'site_name' => ['required', 'min:3', 'max:20'],
-            'description' => ['required', 'min:3', 'max:255'],
-            'about' => ['required', 'min:3', 'max:255'],
-            'copy_rights' => ['required', 'min:3'],
+            'avatar' => ['image', 'mimes:jpeg,png,jpg', 'max:2048'],
             'url_fb' => ['required', 'url'],
             'url_insta' => ['required', 'url'],
             'url_twitter' => ['required', 'url'],
             'url_linkedin' => ['required', 'url'],
+            'bio' => ['required', 'min:4']
         ];
     }
 }

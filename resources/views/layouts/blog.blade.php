@@ -102,10 +102,10 @@
             <div class="w-full bg-white shadow flex flex-col my-4 p-6">
                 <p class="text-xl font-semibold pb-5">About Us</p>
                 <p class="pb-2">{{ $setting->about }}</p>
-                <a href="#"
+                {{-- <a href="#"
                     class="w-full bg-blue-800 text-white font-bold text-sm uppercase rounded hover:bg-blue-700 flex items-center justify-center px-2 py-3 mt-4">
                     Get to know us
-                </a>
+                </a> --}}
             </div>
 
             <div class="w-full bg-white shadow flex flex-col my-4 p-6">
@@ -130,7 +130,7 @@
             </div>
 
             <div class="w-full bg-white shadow flex flex-col my-4 p-6">
-                <p class="text-xl font-semibold pb-5">Top Writers</p>
+                <p class="text-xl font-semibold pb-5">Top 5 Writers</p>
                 {{--  --}}
                 <div class="content flex justify-between py-2 w-full">
                     <div class="px-2 justify-between">
