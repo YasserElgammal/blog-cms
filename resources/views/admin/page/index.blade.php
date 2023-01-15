@@ -24,7 +24,7 @@
                             <tr class="hover:bg-grey-lighter">
                                 <td class="py-4 px-6 border-b border-grey-light">{{ $page->id }}</td>
                                 <td class="py-4 px-6 border-b border-grey-light">{{ $page->name }}</td>
-                                <td class="py-4 px-6 border-b border-grey-light">{{ $page->slug }}</td>
+                                <td class="py-4 px-6 border-b border-grey-light">{{ $page->user->name }}</td>
                                 <td class="py-4 px-6 border-b border-grey-light">
 
                                     <button class="px-4 py-1 text-white font-light tracking-wider bg-green-600 rounded" type="button"  onclick="location.href='{{ route('admin.page.edit', $page->id) }}';">Edit</button>

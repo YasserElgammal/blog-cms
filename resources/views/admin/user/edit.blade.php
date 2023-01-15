@@ -22,7 +22,7 @@
                         </div>
                 {{--  --}}
                 </div>
-                <button class="px-4 py-1 text-white font-light tracking-wider bg-green-600 rounded">Update Tag</button>
+                <button class="px-4 py-1 text-white font-light tracking-wider bg-green-600 rounded">Update Role</button>
                 </form>
             </div>
         </main>
