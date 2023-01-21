@@ -28,11 +28,22 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('admin-login', function (User $user) {
-            return $user->getRole('Admin') || $user->getRole('Writer');
+        Gate::before(function ($user) {
+            if ($user->role->name == 'Admin') {
+                return true;
+            }
         });
+
+        Gate::define('admin-login', function (User $user) {
+            if ($user->role->name == 'Writer') {
+                return true;
+            }
+        });
+
         Gate::define('admin-only', function (User $user) {
-            return $user->getRole('Admin');
+            if ($user->role->name == 'Admin') {
+                return true;
+            }
         });
     }
 }

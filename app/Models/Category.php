@@ -25,6 +25,6 @@ class Category extends Model
     // I use this function to get Active Posts in the current category
     public function publishedPosts()
     {
-        return SELF::posts()->whereStatus(true)->orderBy('id','desc')->paginate(10);
+        return SELF::posts()->with('user')->whereStatus(true)->orderBy('id','desc')->paginate(10);
     }
 }

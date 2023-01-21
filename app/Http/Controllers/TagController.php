@@ -10,11 +10,7 @@ class TagController extends Controller
 {
     public function getPostsPerTags($tag)
     {
-        // $posts = $tag->posts();
         $tags = Tag::whereName($tag)->firstOrFail()->publishedPosts();
-        // $tag = Tag::whereName($tag)->firstOrFail();
-
-        //  dd($tags);
 
         return view('tag', compact('tags'));
     }
