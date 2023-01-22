@@ -1,4 +1,4 @@
-<x-blog-layout>
+<x-blog-layout title="{{ $post_title->title }}">
 
     <div class="container mx-auto flex flex-wrap py-6">
 

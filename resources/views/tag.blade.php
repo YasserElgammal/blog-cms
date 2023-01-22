@@ -1,4 +1,4 @@
-<x-blog-layout>
+<x-blog-layout title="{{ $tag }}">
     <!-- Posts Section -->
     <section class="w-full md:w-2/3 flex flex-col items-center px-3">
 

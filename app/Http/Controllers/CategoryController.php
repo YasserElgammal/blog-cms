@@ -12,8 +12,8 @@ class CategoryController extends Controller
     {
         //Get active posts only in current Category
         $posts = Category::whereSlug($slug)->firstOrFail()->publishedPosts();
-
-        // dd($category);
-        return view('category', compact('posts'));
+        $category_name = Category::select('name')->whereSlug($slug)->first();
+        
+        return view('category', compact('posts', 'category_name'));
     }
 }

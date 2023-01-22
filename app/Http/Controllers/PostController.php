@@ -12,7 +12,8 @@ class PostController extends Controller
     {
         // I've Pass Slug to Get the Category per it's Slug
         $post = Post::with(['category', 'user'])->whereStatus(true)->whereSlug($slug)->firstOrFail();
-
-        return view('post', compact('post'));
+        $post_title = Post::select('title')->whereSlug($slug)->first();
+        
+        return view('post', compact('post', 'post_title'));
     }
 }

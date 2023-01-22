@@ -12,6 +12,6 @@ class TagController extends Controller
     {
         $tags = Tag::whereName($tag)->firstOrFail()->publishedPosts();
 
-        return view('tag', compact('tags'));
+        return view('tag', compact('tags', 'tag'));
     }
 }
