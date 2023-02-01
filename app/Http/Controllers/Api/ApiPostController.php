@@ -19,6 +19,5 @@ class ApiPostController extends Controller
     {
         $post = Post::with(['category', 'user'])->whereId($id)->whereStatus(true)->firstOrFail();
         return PostResource::make($post);
-
     }
 }
