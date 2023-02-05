@@ -138,7 +138,7 @@ class PostController extends Controller
     {
         $searched_text = $request->input('search');
 
-        $posts = Post::query()
+        $posts = Post::query()->with(['category', 'user', 'tags'])
         ->where('title', 'LIKE', "%{$searched_text}%")
         ->orWhere('content', 'LIKE', "%{$searched_text}%")
         ->paginate(10);
