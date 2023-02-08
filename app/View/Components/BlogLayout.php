@@ -34,8 +34,11 @@ class BlogLayout extends Component
         $setting = Setting::first();
         $pages_nav = Page::select('id', 'name', 'slug')->whereNavbar(true)->orderBy('id','desc')->get();
         $pages_footer = Page::select('id', 'name', 'slug')->whereFooter(true)->orderBy('id','desc')->get();
-        $tags = Tag::all();
-        // dd($top_users);
+        $tags = Tag::whereHas('posts', function($q)
+        {
+            $q->where('status', 'like', '1');
+        })->get();
+        
         return view('layouts.blog', compact('categories', 'top_users', 'setting', 'pages_nav', 'pages_footer', 'tags'));
     }
 }

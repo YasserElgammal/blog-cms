@@ -114,15 +114,11 @@
 
                     @foreach ($tags as $tag)
 
-                    @if ($tag->countTagsForPublishedPosts() >= 1)
-
                     <a href="{{ route('tag.show', $tag->name) }}"
                         class="flex justify-center items-center m-1 font-medium py-1 px-2 bg-white rounded-full text-blue-700 bg-blue-100 border border-blue-300 ">
                         <div class="p-1.5 text-xs font-normal leading-none max-w-full flex-initial">
                             {{ $tag->name }}</div>
                     </a>
-
-                    @endif
 
                     @endforeach
 
