@@ -1,14 +1,15 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 ### Project Description
-This is CMS Blog Build with Laravel, It has full control panel functionality with users role.
+This is CMS Blog Build with Laravel, It has full control panel functionality with users roles.
 [Recorded Video for the whole project](https://youtu.be/HUvpQ2WR9rg "Recorded Video for the whole project")
 
 ### What I use it this project
-- Laravel Framework 9.45.1,
+- Laravel Framework 10,
 - Tailwind for front and admin,
-- Laravel Policies.
+- Laravel Policies,
 - Laravel Gates,
+- Custom Validation Rule,
 - Applied ( One to many and Many to many ) relationships betwen models,
 - Faker & Database Seeder,
 - jQuery
@@ -30,6 +31,7 @@ Role Name  | Role_ID
 ------------- | -------------
 Admin  | 1
 Writer | 2 
+User | 3
                 
 
 ### Gate Function
