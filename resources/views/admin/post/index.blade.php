@@ -28,6 +28,9 @@
                                 <th
                                     class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
                                     Tags</th>
+                                 <th
+                                    class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
+                                    Views</th>
                                 <th
                                     class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
                                     Added by</th>
@@ -55,6 +58,13 @@
                                                 No Tags !
                                             @endforelse
                                         </div>
+                                    </td>
+                                    <td class="py-4 px-6 border-b border-grey-light">
+                                    @if (isset($post->views))
+                                    {{$post->views}}
+                                    @else
+                                    0
+                                    @endif
                                     </td>
                                     <td class="py-4 px-6 border-b border-grey-light">{{ $post->user->name }}</td>
                                     <td class="py-4 px-6 border-b border-grey-light">
