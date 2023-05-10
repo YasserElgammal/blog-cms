@@ -11,6 +11,7 @@ This is CMS Blog Build with Laravel, It has full control panel functionality wit
 - Laravel Gates,
 - Custom Validation Rule,
 - Applied ( One to many and Many to many ) relationships betwen models,
+- Posts Views Count using Cookies,
 - Faker & Database Seeder,
 - jQuery
 - SEO friendly slug URLS,
