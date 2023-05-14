@@ -23,6 +23,7 @@ class User extends Authenticatable
         'password',
         'role_id',
         'avatar',
+        'news_letter',
         'bio',
         'url_fb',
         'url_insta',
