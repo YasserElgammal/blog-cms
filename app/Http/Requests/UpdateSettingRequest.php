@@ -25,6 +25,7 @@ class UpdateSettingRequest extends FormRequest
     {
         return [
             'site_name' => ['required', 'min:3', 'max:20'],
+            'contact_mail' => ['required', 'email', 'max:255'],
             'description' => ['required', 'min:3', 'max:255'],
             'about' => ['required', 'min:3', 'max:255'],
             'copy_rights' => ['required', 'min:3'],

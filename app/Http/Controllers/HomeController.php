@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\NewsLetterWeekly;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
@@ -15,6 +16,7 @@ class HomeController extends Controller
     {
         // Get the active posts with (Category and User) details
         $posts = Post::whereStatus(true)->with(['category', 'user'])->orderBy('id','desc')->paginate(10);
+
         return view('index', compact('posts'));
     }
 
