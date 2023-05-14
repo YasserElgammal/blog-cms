@@ -18,6 +18,7 @@ class SettingFactory extends Factory
     {
         return [
             'site_name' => fake()->word(),
+            'contact_email' => fake()->email(),
             'description' => fake()->sentence(),
             'about' => fake()->paragraph(),
             'copy_rights' => fake()->sentence(),

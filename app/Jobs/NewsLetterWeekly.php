@@ -32,7 +32,7 @@ class NewsLetterWeekly implements ShouldQueue
     public function handle(): void
     {
         // get Posts created within 7 Days
-        $posts = Post::where('created_at', '>=', Carbon::now()->subDays(7))->get();
+        $posts = Post::where('created_at', '>=', Carbon::now()->subDays(7))->latest()->limit(10)->get();
 
         // users emails
         $subscribed_users = User::select('email')->where('news_letter', true)->pluck('email');
