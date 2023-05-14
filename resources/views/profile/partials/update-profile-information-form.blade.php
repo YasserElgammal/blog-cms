@@ -45,9 +45,18 @@
                     @endif
                 </div>
             @endif
+
+        </div>
+        <div class="gap-4">
+        <label for="newsletter" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Subscribe to Newsletter') }}</label>
+        <select class="mt-1 block g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" id="newsletter" name="news_letter">
+            <option value="1" {{ $user->news_letter == true ? 'selected' : '' }}>{{ __('Yes') }}</option>
+            <option value="0"  {{ $user->news_letter == false ? 'selected' : '' }}>{{ __('No') }}</option>
+          </select>
         </div>
 
         <div class="flex items-center gap-4">
+
             <x-primary-button>{{ __('Save') }}</x-primary-button>
 
             @if (session('status') === 'profile-updated')

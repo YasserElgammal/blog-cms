@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('url_insta')->nullable();
             $table->string('url_twitter')->nullable();
             $table->string('url_linkedin')->nullable();
+            $table->boolean('news_letter')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

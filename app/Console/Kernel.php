@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('cache:prune-stale-tags')->hourly();
+        $schedule->call('App\Jobs\NewsLetterWeekly')->weekly()->sundays()->at('09:00');;
         // $schedule->command('inspire')->hourly();
     }
 
