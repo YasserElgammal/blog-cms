@@ -9,6 +9,8 @@ This is CMS Blog Build with Laravel, It has full control panel functionality wit
 - Tailwind for front and admin,
 - Laravel Policies,
 - Laravel Gates,
+- Laravel Mail,
+- Laravel Queues (Building weekly Newsletter),
 - Custom Validation Rule,
 - Applied ( One to many and Many to many ) relationships betwen models,
 - Posts Views Count using Cookies,
