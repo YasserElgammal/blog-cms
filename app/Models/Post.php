@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 class Post extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'content', 'image', 'cat_id', 'user_id', 'slug', 'status'];
+    protected $fillable = ['title', 'content', 'image', 'category_id', 'user_id', 'slug', 'status'];
 
     protected function createdAt(): Attribute
     {
@@ -21,16 +21,16 @@ class Post extends Model
     }
 
     public function getNextAttribute(){
-        return static::wherecatId($this->cat_id)->where('id', '>', $this->id)->whereStatus(true)->orderBy('id','asc')->first();
+        return static::wherecategoryId($this->category_id)->where('id', '>', $this->id)->whereStatus(true)->orderBy('id','asc')->first();
     }
 
     public function getPreviousAttribute(){
-        return static::wherecatId($this->cat_id)->where('id', '<', $this->id)->whereStatus(true)->orderBy('id','desc')->first();
+        return static::wherecategoryId($this->category_id)->where('id', '<', $this->id)->whereStatus(true)->orderBy('id','desc')->first();
     }
 
     public function category()
     {
-        return $this->belongsTo(Category::class, 'cat_id');
+        return $this->belongsTo(Category::class);
     }
 
     public function user()

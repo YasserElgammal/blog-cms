@@ -24,7 +24,7 @@ class PageController extends Controller
     public function store(StorePageRequest $request){
 
         $page_data = $request->validated();
-        $page_data['user_id'] = Auth()->user()->id;
+        $page_data['user_id'] = auth()->user()->id;
 
         // dd($page_data);
         Page::create($page_data);

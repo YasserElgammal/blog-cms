@@ -9,7 +9,6 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -57,7 +56,7 @@ class PostController extends Controller
             $post_data['image'] = $get_file;
         }
 
-        $post_data['user_id'] = Auth()->user()->id;
+        $post_data['user_id'] = auth()->user()->id;
 
         // dd($request->tags);
         $post = Post::create($post_data);
@@ -101,7 +100,7 @@ class PostController extends Controller
             $post_data['image'] = $get_file;
         }
 
-        $post_data['user_id'] = Auth()->user()->id;
+        $post_data['user_id'] = auth()->user()->id;
         $post->update($post_data);
         $post->tags()->sync($request->tags);
 

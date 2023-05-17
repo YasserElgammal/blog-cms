@@ -16,7 +16,7 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $user = Auth()->user();
+        $user = auth()->user();
         return view('admin.account.index', compact('user'));
     }
 
