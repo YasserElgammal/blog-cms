@@ -13,7 +13,7 @@ class Category extends Model
     // One to many realtionship
     public function posts()
     {
-        return $this->hasMany(Post::class, 'cat_id', 'id');
+        return $this->hasMany(Post::class);
     }
 
     // One to many realtionship -> Users has many categories

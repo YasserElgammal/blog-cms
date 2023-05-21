@@ -27,7 +27,7 @@ class UpdatePostRequest extends FormRequest
         return [
             'title' => ['required', 'min:3'],
             'content' => ['required', 'min:20'],
-            'cat_id' => ['required', 'exists:categories,id'],
+            'category_id' => ['required', 'exists:categories,id'],
             'slug' => ['required', Rule::unique('posts')->ignore($this->post->id)],
             'status' => ['required', 'boolean'],
             'image' => ['image', 'mimes:jpeg,png,jpg', 'max:2048'],
