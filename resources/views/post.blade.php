@@ -5,6 +5,7 @@
         <!-- Post Section -->
         <section class="w-full md:w-2/3 flex flex-col items-center px-3">
 
+
             <article class="flex flex-col shadow my-4">
                 <!-- Article Image -->
                 @if ($post->image == 'dummy.jpg')
@@ -23,6 +24,89 @@
                     {!! $post->content !!}
                 </div>
             </article>
+            {{-- author --}}
+            <div class="w-full flex flex-col text-center md:text-left md:flex-row shadow bg-white mt-10 mb-10 p-6">
+                <div class="w-full md:w-1/5 flex justify-center md:justify-start pb-4">
+                    @if ($post->user->avatar == null)
+                        <img src="{{ asset('import/assets/profile-pic-dummy.png') }}"
+                            class="rounded-full shadow h-32 w-32">
+                    @else
+                        <img src="{{ asset('storage') . '/' . $post->user->avatar }}"
+                            class="rounded-full shadow h-32 w-32">
+                    @endif
+                </div>
+                <div class="flex-1 flex flex-col justify-center md:justify-start">
+                    <p class="font-semibold text-2xl">{{ $post->user->name }}</p>
+                    <p class="pt-2">{{ $post->user->bio }}</p>
+                    <div
+                        class="flex items-center justify-center md:justify-start text-2xl no-underline text-blue-800 pt-4">
+                        <a class="" href="{{ $post->user->url_fb }}">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a class="pl-4" href="{{ $post->user->url_insta }}">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a class="pl-4" href="{{ $post->user->url_twitter }}">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a class="pl-4" href="{{ $post->user->url_linkedin }}">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {{--  --}}
+            {{-- comment section --}}
+            @auth
+                @if ($errors->any())
+                    <div role="alert">
+                        <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2 mx-4">
+                            Validation Errors
+                        </div>
+                        <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700 mx-4">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                @endif
+                <div class="w-full flex text-center md:text-left md:flex-col shadow bg-white mt-10 mb-10 p-6">
+                    <p class="font-semibold text-2xl pb-2">Comment As: {{ auth()->user()->name }}</p>
+                    <form method="POST" action="{{ route('post.comment', $post) }}">
+                        @csrf
+                        <textarea class="w-full p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg" name="body" cols="30" rows="10" placeholder="Write your comment here .."></textarea>
+                        <button type="submit"
+                            class="mt-2 py-2 px-4 bg-green-500 hover:bg-green-700 hover:text-white">Submit
+                            Comment</button>
+                    </form>
+                </div>
+            @else
+                <div class="w-full flex text-center md:text-left md:flex-col shadow bg-red-400 mt-10 mb-10 p-6">
+                    <p class="font-semibold text-white text-2xl pb-2"> Signin to able to comment !</p>
+                </div>
+            @endauth
+
+            <div class="w-full flex text-center md:text-left md:flex-col shadow bg-white mt-10 mb-10 p-6">
+                <p class="font-semibold text-2xl pb-2">Comments</p>
+                {{-- user comments --}}
+                @foreach ($comments as $comment)
+                    <div class="w-full flex text-center md:text-left md:flex-col shadow bg-white mt-10 mb-10 p-6">
+                        <p class="font-semibold text-xl pb-2">{{ $comment->user->name }}</p>
+                        <p class="font-semibold text-gray-600 text-lg pb-2">{{ $comment->body }}</p>
+                        @can('delete', $comment)
+                            <form method="POST" action="{{ route('comment.destroy', $comment->id) }}"
+                                onsubmit="return confirm('Are you sure?')">
+                                @csrf
+                                @method('DELETE')
+                                <button class="py-2 px-4 bg-red-500 hover:bg-red-700 hover:text-white">Delete</button>
+                            </form>
+                        @endcan
+                    </div>
+                @endforeach
+                {{--  --}}
+            </div>
 
             <div class="w-full flex pt-6">
                 @if (isset($post->previous))
@@ -52,34 +136,7 @@
                 @endif
             </div>
 
-            <div class="w-full flex flex-col text-center md:text-left md:flex-row shadow bg-white mt-10 mb-10 p-6">
-                <div class="w-full md:w-1/5 flex justify-center md:justify-start pb-4">
-                    @if ($post->user->avatar == null)
-                    <img src="{{ asset('import/assets/profile-pic-dummy.png') }}" class="rounded-full shadow h-32 w-32">
-                    @else
-                    <img src="{{ asset("storage"). '/' . $post->user->avatar }}" class="rounded-full shadow h-32 w-32">
-                    @endif
-                </div>
-                <div class="flex-1 flex flex-col justify-center md:justify-start">
-                    <p class="font-semibold text-2xl">{{ $post->user->name }}</p>
-                    <p class="pt-2">{{ $post->user->bio }}</p>
-                    <div
-                        class="flex items-center justify-center md:justify-start text-2xl no-underline text-blue-800 pt-4">
-                        <a class="" href="{{ $post->user->url_fb }}">
-                            <i class="fab fa-facebook"></i>
-                        </a>
-                        <a class="pl-4" href="{{ $post->user->url_insta }}">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a class="pl-4" href="{{ $post->user->url_twitter }}">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a class="pl-4" href="{{ $post->user->url_linkedin }}">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
+
 
         </section>
 

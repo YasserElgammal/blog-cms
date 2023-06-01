@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CommentRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 
 class PostController extends Controller
@@ -13,9 +15,10 @@ class PostController extends Controller
     {
         // I've Pass Slug to Get the Category per it's Slug
         $post = Post::with(['category', 'user'])->whereStatus(true)->whereSlug($slug)->firstOrFail();
+        $comments = $post->comments;
         $post_title = $post->title;
 
-        if ( !Cookie::get('post_viewed_'.$post->id) ) {
+        if (!Cookie::get('post_viewed_' . $post->id)) {
             // Update view counter of post
             $post->views = (int) $post->views + 1;
             $post->save();
@@ -23,6 +26,7 @@ class PostController extends Controller
             Cookie::queue('post_viewed_' . $post->id, true, 60 * 24);
         }
 
-        return view('post', compact('post', 'post_title'));
+        return view('post', compact('post', 'post_title', 'comments'));
     }
+
 }
