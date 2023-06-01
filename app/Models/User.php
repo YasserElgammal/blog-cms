@@ -74,4 +74,9 @@ class User extends Authenticatable
     {
         return SELF::role()->whereName($role_name)->exists();
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

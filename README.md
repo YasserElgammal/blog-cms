@@ -10,8 +10,9 @@ This is CMS Blog Build with Laravel, It has full control panel functionality wit
 - Laravel Policies,
 - Laravel Gates,
 - Laravel Mail,
-- Laravel Queues (Building weekly Newsletter),
+- Laravel Queues ( Building weekly Newsletter ),
 - Custom Validation Rule,
+- Comments, Applied ( Polymorphic relationship ),
 - Applied ( One to many and Many to many ) relationships betwen models,
 - Posts Views Count using Cookies,
 - Faker & Database Seeder,
@@ -21,7 +22,7 @@ This is CMS Blog Build with Laravel, It has full control panel functionality wit
 ### Project Functionality
 #### Admin Panel
 - Edit General Blog informations,
-- Create/ Update / Delete ( Categories, Posts, Tags and Custom Pages)
+- Create/ Update / Delete ( Categories, Posts, Tags and Custom Pages )
 - Manage Roles
 
 ### Writer Panel

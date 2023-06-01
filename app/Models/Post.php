@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Post extends Model
 {
@@ -20,12 +20,14 @@ class Post extends Model
         );
     }
 
-    public function getNextAttribute(){
-        return static::wherecategoryId($this->category_id)->where('id', '>', $this->id)->whereStatus(true)->orderBy('id','asc')->first();
+    public function getNextAttribute()
+    {
+        return static::wherecategoryId($this->category_id)->where('id', '>', $this->id)->whereStatus(true)->orderBy('id', 'asc')->first();
     }
 
-    public function getPreviousAttribute(){
-        return static::wherecategoryId($this->category_id)->where('id', '<', $this->id)->whereStatus(true)->orderBy('id','desc')->first();
+    public function getPreviousAttribute()
+    {
+        return static::wherecategoryId($this->category_id)->where('id', '<', $this->id)->whereStatus(true)->orderBy('id', 'desc')->first();
     }
 
     public function category()
@@ -41,5 +43,13 @@ class Post extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    /**
+     * Get all of the post's comments.
+     */
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
     }
 }

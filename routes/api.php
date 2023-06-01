@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Api\ApiCategoryController;
 use App\Http\Controllers\Api\ApiPostController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
