@@ -41,6 +41,15 @@ User | 3
 ### Gate Function
 There is a gate filter login when the user login to the admin panel if the user is Admin it will have full functions to manage the blog and if a Writer it will have few functions.
 
+### Api Routes
+                    
+Method  | End_Point | Description
+------------- | ------------- | -------------
+GET | api/categories | Show All Categories
+GET | api/categories/{id} | Show All Posts inside Specific Category
+GET | api/posts | Show All Posts
+GET | api/posts/{id} | Show Specific Post
+
 ## Requirements
 - PHP >= 8.1
 - MySQL or other database server
