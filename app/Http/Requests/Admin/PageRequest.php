@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StorePageRequest extends FormRequest
+class PageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,7 +28,7 @@ class StorePageRequest extends FormRequest
 
         return [
             'name' => ['required', 'min:3'],
-            'slug' => ['required', 'unique:pages'],
+            'slug' => ['required', Rule::unique('pages')->ignore($this?->page?->id)],
             'content' => ['required', 'min:10'],
             'navbar' => ['required', 'boolean'],
             'footer' => ['required', 'boolean'],

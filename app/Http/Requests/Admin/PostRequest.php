@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdatePostRequest extends FormRequest
+class PostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,9 +28,9 @@ class UpdatePostRequest extends FormRequest
             'title' => ['required', 'min:3'],
             'content' => ['required', 'min:20'],
             'category_id' => ['required', 'exists:categories,id'],
-            'slug' => ['required', Rule::unique('posts')->ignore($this->post->id)],
+            'slug' => ['required', Rule::unique('posts')->ignore($this?->post?->id)],
             'status' => ['required', 'boolean'],
-            'image' => ['image', 'mimes:jpeg,png,jpg', 'max:2048'],
+            'image' => ['image', 'mimes:jpeg,png,jpg', 'max:2048', Rule::requiredIf(!$this?->post?->id)],
             'tags' => ['exists:tags,id']
         ];
     }

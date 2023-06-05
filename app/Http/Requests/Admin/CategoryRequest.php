@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin;
 
 use App\Rules\Authcheck;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateCategoryRequest extends FormRequest
+class CategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,8 +26,8 @@ class UpdateCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'min:3', 'max:25'],
-            'slug' => ['required', Rule::unique('categories')->ignore($this->category->id)],
+            'name' => ['required', 'min:3', 'max:25', Rule::unique('categories')->ignore($this?->category?->id)],
+            'slug' => ['required', Rule::unique('categories')->ignore($this?->category?->id)],
             'user_id' => ['required', 'exists:users,id', new Authcheck]
         ];
     }

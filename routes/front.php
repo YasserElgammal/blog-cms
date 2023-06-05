@@ -1,13 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\PostController as FrontPostController;
-use App\Http\Controllers\CategoryController as FrontCategoryController;
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\PageController as FrontPageController;
-use App\Http\Controllers\TagController as FrontTagController;
+use App\Http\Controllers\Front\HomeController;
+use App\Http\Controllers\Front\ProfileController;
+use App\Http\Controllers\Front\PostController as FrontPostController;
+use App\Http\Controllers\Front\CategoryController as FrontCategoryController;
+use App\Http\Controllers\Front\CommentController;
+use App\Http\Controllers\Front\PageController as FrontPageController;
+use App\Http\Controllers\Front\TagController as FrontTagController;
 
 // FrontEnd Routes [Public routes]
 Route::get('/', [HomeController::class, 'index'])->name('webhome');

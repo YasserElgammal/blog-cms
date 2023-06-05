@@ -16,14 +16,16 @@ Route::middleware(['auth', 'can:admin-login'])->name('admin.')->prefix('/admin')
     Route::get('/', [AdminController::class, 'index'])->name('index');
     Route::get('/post/search', [PostController::class, 'search'])->name('post.search');
     Route::get('/post/slug-get', [PostController::class, 'getSlug'])->name('post.getslug');
-    Route::resource('/post', PostController::class);
-    Route::resource('/tag', TagController::class);
+    Route::resources([
+        'post' => PostController::class,
+        'tag' => TagController::class,
+    ]);
     Route::resource('/account', AccountController::class, ['only' => ['index', 'update']]);
     // Special To Admin Role Only
     Route::middleware(['can:admin-only'])->group(function () {
         Route::get('/category/slug-get', [CategoryController::class, 'getSlug'])->name('category.getslug');
-        Route::resource('/category', CategoryController::class);
         Route::get('/page/slug-get', [PageController::class, 'getSlug'])->name('page.getslug');
+        Route::resource('/category', CategoryController::class);
         Route::resource('/user', UserController::class, ['except' => ['create', 'store', 'show']]);
         Route::resource('/page', PageController::class);
         Route::resource('/role', RoleController::class, ['only' => ['index']]);
