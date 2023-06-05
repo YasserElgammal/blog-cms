@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Front;
 
+use App\Http\Controllers\Controller;
 use App\Models\Post;
 
 class HomeController extends Controller
@@ -10,7 +11,7 @@ class HomeController extends Controller
     public function index()
     {
         // Get the active posts with (Category and User) details
-        $posts = Post::whereStatus(true)->with(['category', 'user'])->orderBy('id','desc')->paginate(10);
+        $posts = Post::published()->with(['category', 'user'])->latest('created_at')->paginate(10);
 
         return view('index', compact('posts'));
     }

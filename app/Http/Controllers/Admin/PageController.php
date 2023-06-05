@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StorePageRequest;
+use App\Http\Requests\Admin\PageRequest;
 use Illuminate\Http\Request;
 use App\Models\Page;
 use Illuminate\Support\Str;
@@ -21,7 +21,7 @@ class PageController extends Controller
         return view('admin.page.create');
     }
 
-    public function store(StorePageRequest $request){
+    public function store(PageRequest $request){
 
         $page_data = $request->validated();
         $page_data['user_id'] = auth()->user()->id;
@@ -30,6 +30,16 @@ class PageController extends Controller
         Page::create($page_data);
 
         return to_route('admin.page.index')->with('message', 'Page Created');
+    }
+
+    public function update(PageRequest $request, Page $page){
+
+        $page_data = $request->validated();
+        $page_data['user_id'] = auth()->user()->id;
+
+        $page->update($page_data);
+
+        return to_route('admin.page.index')->with('message', 'Page Updated');
     }
 
     public function edit(Page $page){

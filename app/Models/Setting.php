@@ -13,6 +13,7 @@ class Setting extends Model
         'description',
         'about',
         'copy_rights',
+        'contact_email',
         'url_fb',
         'url_insta',
         'url_twitter',

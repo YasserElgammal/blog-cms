@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Post extends Model
 {
@@ -20,14 +19,19 @@ class Post extends Model
         );
     }
 
+    public function scopePublished($query)
+    {
+        return $query->where('status', true);
+    }
+
     public function getNextAttribute()
     {
-        return static::wherecategoryId($this->category_id)->where('id', '>', $this->id)->whereStatus(true)->orderBy('id', 'asc')->first();
+        return static::wherecategoryId($this->category_id)->where('id', '>', $this->id)->published()->orderBy('id', 'asc')->first();
     }
 
     public function getPreviousAttribute()
     {
-        return static::wherecategoryId($this->category_id)->where('id', '<', $this->id)->whereStatus(true)->orderBy('id', 'desc')->first();
+        return static::wherecategoryId($this->category_id)->where('id', '<', $this->id)->published()->orderBy('id', 'desc')->first();
     }
 
     public function category()

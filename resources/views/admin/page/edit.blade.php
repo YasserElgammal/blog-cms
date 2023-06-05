@@ -10,6 +10,7 @@
                 </p>
                 <form method="POST" action="{{ route('admin.page.update', $page->id) }}">
                     @csrf
+                    @method('PUT')
                     <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div class="mb-1">
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>

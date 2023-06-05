@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreTagRequest;
-use App\Http\Requests\UpdateTagRequest;
+use App\Http\Requests\Admin\TagRequest;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
@@ -37,7 +36,7 @@ class TagController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreTagRequest $request)
+    public function store(TagRequest $request)
     {
         $validate = $request->validated();
         Tag::create($validate);
@@ -63,7 +62,7 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateTagRequest $request, Tag $tag)
+    public function update(TagRequest $request, Tag $tag)
     {
         $vaildated = $request->validated();
         $tag->update($vaildated);

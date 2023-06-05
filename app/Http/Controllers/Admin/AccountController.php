@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UpdateAccountRequest;
-use App\Models\User;
+use App\Http\Requests\Admin\UpdateAccountRequest;
 use Illuminate\Support\Facades\Storage;
 
 class AccountController extends Controller
