@@ -7,11 +7,7 @@
         @forelse ($posts as $post)
             <article class="flex flex-col shadow my-4">
                 <a href="{{ route('post.show', $post->slug) }}" class="hover:opacity-75">
-                    @if ($post->image == 'dummy.jpg')
-                        <img src="{{ asset('import/assets/post-pic-dummy.png') }}">
-                    @else
                         <img src="{{ asset("storage/$post->image") }}" width="1000" height="500">
-                    @endif
                 </a>
                 <div class="bg-white flex flex-col justify-start p-6">
                     <a href="{{ route('category.show', $post->category->slug) }} "
