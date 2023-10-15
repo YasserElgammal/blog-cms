@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Traits\SlugCreater;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
+    use SlugCreater;
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +18,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::with('user')->get();
+        $categories = Category::with('user:id,name')->get();
+
         return view('admin.category.index', compact('categories'));
     }
 
@@ -39,10 +41,9 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $validate = $request->validated();
-        Category::create($validate);
+        Category::create($request->validated());
 
-        return to_route('admin.category.index')->with('message', 'Category Created');
+        return to_route('admin.category.index')->with('message', trans('admin.category_created'));
     }
 
     /**
@@ -76,10 +77,9 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, Category $category)
     {
-        $vaildated = $request->validated();
-        $category->update($vaildated);
+        $category->update($request->validated());
 
-        return to_route('admin.category.index')->with('message', 'Category Updated');
+        return to_route('admin.category.index')->with('message',  trans('admin.category_updated'));
     }
 
     /**
@@ -91,17 +91,14 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return to_route('admin.category.index')->with('message', 'Category Deleted !');
+
+        return to_route('admin.category.index')->with('message', trans('admin.category_deleted'));
     }
 
     public function getSlug(Request $request)
     {
-        $slug = str($request->name)->slug();
-        if (Category::where('slug', $slug)->exists()) {
-            $slug = $slug . '-' . Str::random(2);
-            return response()->json(['slug' => $slug]);
-        } else {
-            return response()->json(['slug' => $slug]);
-        }
+        $slug = $this->createSlug($request, Category::class);
+
+        return response()->json(['slug' => $slug]);
     }
 }

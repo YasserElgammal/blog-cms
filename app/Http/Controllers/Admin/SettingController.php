@@ -15,11 +15,10 @@ class SettingController extends Controller
         return view('admin.setting.index', compact('setting'));
     }
 
-    public function update(UpdateSettingRequest $request, Setting $setting){
+    public function update(UpdateSettingRequest $request, Setting $setting)
+    {
+        $setting->update($request->validated());
 
-        $validated = $request->validated();
-        $setting->update($validated);
-        // dd($validated);
-        return back()->with('message','Data Updated !');
+        return back()->with('message', trans('admin.data_updated'));
     }
 }

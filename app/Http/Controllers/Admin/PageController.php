@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Traits\SlugCreater;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\PageRequest;
 use Illuminate\Http\Request;
@@ -10,39 +11,37 @@ use Illuminate\Support\Str;
 
 class PageController extends Controller
 {
-    public function index(){
+    use SlugCreater;
 
-        $pages = Page::with('user')->orderBy('id', 'desc')->paginate(15);
+    public function index()
+    {
+        $pages = Page::with('user:id,name')->orderBy('id', 'desc')->paginate(15);
+
         return view('admin.page.index', compact('pages'));
     }
 
-    public function create(){
+    public function create()
+    {
 
         return view('admin.page.create');
     }
 
-    public function store(PageRequest $request){
+    public function store(PageRequest $request)
+    {
+        Page::create($request->validated());
 
-        $page_data = $request->validated();
-        $page_data['user_id'] = auth()->user()->id;
-
-        // dd($page_data);
-        Page::create($page_data);
-
-        return to_route('admin.page.index')->with('message', 'Page Created');
+        return to_route('admin.page.index')->with('message', trans('admin.page_created'));
     }
 
-    public function update(PageRequest $request, Page $page){
+    public function update(PageRequest $request, Page $page)
+    {
+        $page->update($request->validated());
 
-        $page_data = $request->validated();
-        $page_data['user_id'] = auth()->user()->id;
-
-        $page->update($page_data);
-
-        return to_route('admin.page.index')->with('message', 'Page Updated');
+        return to_route('admin.page.index')->with('message', trans('admin.page_updated'));
     }
 
-    public function edit(Page $page){
+    public function edit(Page $page)
+    {
 
         return view('admin.page.edit', compact('page'));
     }
@@ -50,19 +49,14 @@ class PageController extends Controller
     public function destroy(Page $page)
     {
         $page->delete();
-        return back()->with('message', 'Page Deleted');
+
+        return back()->with('message', trans('admin.page_deleted'));
     }
 
     public function getSlug(Request $request)
     {
-        $slug = str($request->name)->slug();
-        if (Page::where('slug', $slug)->exists()) {
-            $slug = $slug . '-' . Str::random(2);
-            return response()->json(['slug' => $slug]);
-        } else {
-            return response()->json(['slug' => $slug]);
-        }
+        $slug = $this->createSlug($request, Page::class);
+
+        return response()->json(['slug' => $slug]);
     }
-
-
 }

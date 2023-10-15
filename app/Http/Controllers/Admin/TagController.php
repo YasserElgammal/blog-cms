@@ -38,10 +38,9 @@ class TagController extends Controller
      */
     public function store(TagRequest $request)
     {
-        $validate = $request->validated();
-        Tag::create($validate);
+        Tag::create($request->validated());
 
-        return to_route('admin.tag.index')->with('message', 'Tag Created');
+        return to_route('admin.tag.index')->with('message', trans('admin.tag_created'));
     }
 
     /**
@@ -64,10 +63,9 @@ class TagController extends Controller
      */
     public function update(TagRequest $request, Tag $tag)
     {
-        $vaildated = $request->validated();
-        $tag->update($vaildated);
+        $tag->update($request->validated());
 
-        return to_route('admin.tag.index')->with('message', 'Tag Updated');
+        return to_route('admin.tag.index')->with('message',  trans('admin.tag_updated'));
     }
 
     /**
@@ -79,6 +77,7 @@ class TagController extends Controller
     public function destroy(Tag $tag)
     {
         $tag->delete();
+        
         return to_route('admin.tag.index')->with('message', 'Tag Deleted !');
     }
 }

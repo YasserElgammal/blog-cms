@@ -19,6 +19,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::with('role')->orderBy('id', 'desc')->paginate(15);
+
         return view('admin.user.index', compact('users'));
     }
 
@@ -31,6 +32,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $roles = Role::all();
+
         return view('admin.user.edit', compact('user', 'roles'));
     }
 
@@ -47,7 +49,7 @@ class UserController extends Controller
         $user->role_id = $validated['role_id'];
         $user->update();
 
-        return to_route('admin.user.index')->with('message','Role to user Updated');
+        return to_route('admin.user.index')->with('message', trans('admin.role_updated'));
     }
 
     /**
@@ -59,6 +61,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return to_route('admin.user.index')->with('message', 'User Deleted !');
+
+        return to_route('admin.user.index')->with('message', trans('admin.user_deleted'));
     }
 }

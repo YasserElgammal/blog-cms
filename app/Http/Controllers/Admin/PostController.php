@@ -7,12 +7,14 @@ use App\Http\Requests\Admin\PostRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
+use App\Traits\SlugCreater;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
+    use SlugCreater;
+
     public function __construct()
     {
         $this->authorizeResource(Post::class, 'post');
@@ -24,7 +26,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with(['category', 'user', 'tags'])->orderByDesc('id')->paginate(15);
+        $posts = Post::with(['category:id,name', 'user:id,name', 'tags:id,name'])->latest()->paginate(15);
+
         return view('admin.post.index', compact('posts'));
     }
 
@@ -37,6 +40,7 @@ class PostController extends Controller
     {
         $categories = Category::all();
         $tags = Tag::all();
+
         return view('admin.post.create', compact('categories', 'tags'));
     }
 
@@ -55,18 +59,13 @@ class PostController extends Controller
             $post_data['image'] = $get_file;
         }
 
-        $post_data['user_id'] = auth()->user()->id;
-
-        // dd($request->tags);
         $post = Post::create($post_data);
 
         if ($request->has('tags')) {
-            // $validate_tags = $request->validate(['tags'=> ['exists:tags,id']]);
             $post->tags()->attach($request->tags);
-            // dd($post);
         }
 
-        return to_route('admin.post.index')->with('message', 'Post Created');
+        return to_route('admin.post.index')->with('message', trans('admin.post_created'));
     }
 
     /**
@@ -79,6 +78,7 @@ class PostController extends Controller
     {
         $categories = Category::all();
         $tags = Tag::all();
+
         return view('admin.post.edit', compact('post', 'categories', 'tags'));
     }
 
@@ -99,11 +99,10 @@ class PostController extends Controller
             $post_data['image'] = $get_file;
         }
 
-        $post_data['user_id'] = auth()->user()->id;
         $post->update($post_data);
         $post->tags()->sync($request->tags);
 
-        return to_route('admin.post.index')->with('message', 'Post Updated');
+        return to_route('admin.post.index')->with('message', trans('admin.post_updated'));
     }
 
     /**
@@ -118,18 +117,15 @@ class PostController extends Controller
             Storage::delete($post->image);
         }
         $post->delete();
-        return back()->with('message', 'Post Deleted');
+
+        return back()->with('message', trans('admin.post_deleted'));
     }
 
     public function getSlug(Request $request)
     {
-        $slug = str($request->title)->slug();
-        if (Post::where('slug', $slug)->exists()) {
-            $slug = $slug . '-' . Str::random(2);
-            return response()->json(['slug' => $slug]);
-        } else {
-            return response()->json(['slug' => $slug]);
-        }
+        $slug = $this->createSlug($request, Post::class);
+
+        return response()->json(['slug' => $slug]);
     }
 
     public function search(Request $request)
@@ -137,12 +133,11 @@ class PostController extends Controller
         $searched_text = $request->input('search');
 
         $posts = Post::query()->with(['category', 'user', 'tags'])
-        ->where('title', 'LIKE', "%{$searched_text}%")
-        ->orWhere('content', 'LIKE', "%{$searched_text}%")
-        ->paginate(10);
+            ->where('title', 'LIKE', "%{$searched_text}%")
+            ->orWhere('content', 'LIKE', "%{$searched_text}%")
+            ->paginate(10);
 
-    // Return the search view with the resluts
-    return view('admin.post.search', compact('posts'));
-
+        // Return the search view with the resluts
+        return view('admin.post.search', compact('posts'));
     }
 }
