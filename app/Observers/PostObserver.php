@@ -14,6 +14,8 @@ class PostObserver
 
     public function updating(Post $post)
     {
-        $post->user_id = Auth::id();
+        if (!request()->routeIs('post.show')) {
+            $post->user_id = Auth::id();
+        }
     }
 }
