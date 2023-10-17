@@ -65,3 +65,12 @@ GET | api/posts/{id} | Show Specific Post
 6. Run migrations by executing `php artisan migrate` , Then Run  `php artisan db:seed` if you want use faker database records,
 7. Start the project by running `php artisan serve`
 
+## About Me
+
+Iam a Junior Backend Developer with one year of experience, I specialize in PHP, Laravel, and front-end technologies like TailwindCSS and Livewire. I have expertise in developing REST APIs and working with MySQL databases, and I am familiar with software architecture patterns such as MVC and HMVC. I am committed to producing clean, well-documented code that is easily maintainable, and I enjoy sharing my knowledge through various channels. I am eager to take on new challenges and continue to develop my skills.
+
+- [LinkedIn](https://www.linkedin.com/in/elgammal/).
+- [Youtube](https://www.youtube.com/@yasser.elgammal).
+- [Dev_to](https://dev.to/yasserelgammal).
+
+
