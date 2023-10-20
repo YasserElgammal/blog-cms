@@ -11,8 +11,9 @@ class CategoryController extends Controller
     public function getCategoryBySlug($slug)
     {
         //Get active posts only in current Category
-        $posts = Category::whereSlug($slug)->firstOrFail()->publishedPosts();
-        $category_name = Category::select('name')->whereSlug($slug)->firstOrFail();
+        $category = Category::whereSlug($slug)->firstOrFail();
+        $posts = $category->publishedPosts();
+        $category_name = $category->name;
 
         return view('category', compact('posts', 'category_name'));
     }
