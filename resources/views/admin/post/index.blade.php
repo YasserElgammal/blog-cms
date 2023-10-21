@@ -60,11 +60,7 @@
                                         </div>
                                     </td>
                                     <td class="py-4 px-6 border-b border-grey-light">
-                                    @if (isset($post->views))
                                     {{$post->views}}
-                                    @else
-                                    0
-                                    @endif
                                     </td>
                                     <td class="py-4 px-6 border-b border-grey-light">{{ $post->user->name }}</td>
                                     <td class="py-4 px-6 border-b border-grey-light">
