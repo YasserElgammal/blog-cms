@@ -25,7 +25,7 @@ class PostController extends Controller
             Cookie::queue('post_viewed_' . $post->id, true, 60 * 24);
         }
 
-        return view('post', compact('post', 'post_title', 'comments'));
+        return view('front.post', compact('post', 'post_title', 'comments'));
     }
 
 }

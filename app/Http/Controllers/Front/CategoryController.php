@@ -15,6 +15,6 @@ class CategoryController extends Controller
         $posts = $category->publishedPosts();
         $category_name = $category->name;
 
-        return view('category', compact('posts', 'category_name'));
+        return view('front.category', compact('posts', 'category_name'));
     }
 }
