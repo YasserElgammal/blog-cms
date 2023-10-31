@@ -18,6 +18,18 @@ This is CMS Blog Build with Laravel, It has full control panel functionality wit
 - Faker & Database Seeder,
 - jQuery
 - SEO friendly slug URLS,
+l
+### Screenshots
+
+#### Admin Panel
+<img src="screenshot/admin-panel-admin.png" width="750" alt="Admin Panel">
+
+#### Writer Panel
+<img src="screenshot/admin-panel-admin.png" width="750" alt="Admin Panel">
+
+#### Front Blog
+<img src="screenshot/blog-front.png" width="750" alt="Admin Panel">
+
 
 ### Project Functionality
 #### Admin Panel
