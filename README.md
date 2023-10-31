@@ -22,13 +22,16 @@ l
 ### Screenshots
 
 #### Admin Panel
-<img src="screenshot/admin-panel-admin.png" width="750" alt="Admin Panel">
+<img src="screenshot/admin-panel-admin.png" width="750" alt="Admin Panel - BlogCMS - YasserElgammal">
 
 #### Writer Panel
-<img src="screenshot/admin-panel-admin.png" width="750" alt="Admin Panel">
+<img src="screenshot/admin-panel-writer.png" width="750" alt="Writer Panel - BlogCMS - YasserElgammal">
 
 #### Front Blog
-<img src="screenshot/blog-front.png" width="750" alt="Admin Panel">
+<img src="screenshot/blog-front.png" width="750" alt="Front Blog - BlogCMS - YasserElgammal">
+
+#### Front Blog - PostView
+<img src="screenshot/post-view.png" width="750" alt="Front Blog - PostView - BlogCMS - YasserElgammal">
 
 
 ### Project Functionality
