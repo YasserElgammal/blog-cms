@@ -21,6 +21,9 @@ This is CMS Blog Build with Laravel, It has full control panel functionality wit
 l
 ### Screenshots
 
+#### Data Base Schema
+<img src="screenshot/schema-database-blog-cms-Yasser-Elgammal.png" width="750" alt="Database Schema - BlogCMS - YasserElgammal">
+
 #### Admin Panel
 <img src="screenshot/admin-panel-admin.png" width="750" alt="Admin Panel - BlogCMS - YasserElgammal">
 
