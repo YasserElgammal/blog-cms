@@ -1,8 +1,5 @@
-<x-blog-layout>
      <!-- Posts Section -->
  <section class="w-full md:w-2/3 flex flex-col items-center px-3">
-
-
         <!-- Article -->
         @forelse ($posts as $post)
         <article class="flex flex-col shadow my-4">
@@ -28,10 +25,6 @@
 
     <!-- Pagination -->
     <div class="flex items-center py-8">
-
         {{ $posts->links() }}
-
     </div>
-
 </section>
-</x-blog-layout>

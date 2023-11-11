@@ -18,8 +18,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::with('user:id,name')->get();
-
+        $categories = Category::with('parent')->get();
         return view('admin.category.index', compact('categories'));
     }
 
@@ -29,8 +28,9 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('admin.category.create');
+    {   
+        $parents = Category::where('parent_id','=',null)->get();
+        return view('admin.category.create', compact('parents'));
     }
 
     /**
@@ -40,9 +40,8 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(CategoryRequest $request)
-    {
+    {   
         Category::create($request->validated());
-
         return to_route('admin.category.index')->with('message', trans('admin.category_created'));
     }
 
@@ -64,8 +63,9 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Category $category)
-    {
-        return view('admin.category.edit', compact('category'));
+    {   
+        $parents = Category::where('parent_id','=',null)->get();
+        return view('admin.category.edit', compact('category','parents'));
     }
 
     /**

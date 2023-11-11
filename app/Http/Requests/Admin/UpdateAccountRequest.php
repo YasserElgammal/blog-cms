@@ -25,11 +25,11 @@ class UpdateAccountRequest extends FormRequest
     {
         return [
             'avatar' => ['image', 'mimes:jpeg,png,jpg', 'max:2048'],
-            'url_fb' => ['required', 'url'],
-            'url_insta' => ['required', 'url'],
-            'url_twitter' => ['required', 'url'],
-            'url_linkedin' => ['required', 'url'],
-            'bio' => ['required', 'min:4']
+            'url_fb' => ['nullable', 'url'],
+            'url_insta' => ['nullable', 'url'],
+            'url_twitter' => ['nullable', 'url'],
+            'url_linkedin' => ['nullable', 'url'],
+            'bio' => ['nullable', 'min:4']
         ];
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'slug', 'user_id'];
+    protected $fillable = ['name', 'slug','parent_id'];
 
     // One to many realtionship
     public function posts()
@@ -16,15 +16,18 @@ class Category extends Model
         return $this->hasMany(Post::class);
     }
 
-    // One to many realtionship -> Users has many categories
-    public function user()
+    public function children()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->hasMany(Category::class, 'parent_id', 'id');
     }
 
+    public function parent()
+    {
+        return $this->belongsTo(Category::class, 'parent_id');
+    }
     // I use this function to get Active Posts in the current category
     public function publishedPosts()
     {
-        return SELF::posts()->with(['user:id,name', 'category'])->published()->latest('created_at')->paginate(10);
+        return SELF::posts()->with('category')->published()->latest('created_at')->paginate(10);
     }
 }

@@ -19,9 +19,17 @@
                     <label for="slug" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category Slug</label>
                     <input type="text"  name="slug" id="slug" value="{{ old('slug') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                 </div>
+                <div class="mb-1">
+                    <label for="parent_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parent</label>
+                    <select name="parent_id" id="parent_id" class="form-control">
+                        <option value="">Chọn danh mục cha</option>
+                        @foreach($parents as $parent)
+                            <option value="{{$parent->id}}">{{$parent->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
                 {{--  --}}
                 </div>
-                <input type="hidden" id="user" name="user_id" value="{{ auth()->user()->id }}">
                 <button class="px-4 py-1 text-white font-light tracking-wider bg-blue-600 rounded">Add Category</button>
                 </form>
             </div>
