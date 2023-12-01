@@ -30,15 +30,14 @@ class BlogLayout extends Component
     public function render()
     {
         $categories = Category::select('id', 'name', 'slug')->get();
-        $top_users= User::withCount('posts')->orderBy('posts_count','desc')->take(5)->get();
+        $top_users = User::withCount('posts')->orderByDesc('posts_count')->take(5)->get();
         $setting = Setting::first();
-        $pages_nav = Page::select('id', 'name', 'slug')->whereNavbar(true)->orderBy('id','desc')->get();
-        $pages_footer = Page::select('id', 'name', 'slug')->whereFooter(true)->orderBy('id','desc')->get();
-        $tags = Tag::whereHas('posts', function($q)
-        {
-            $q->where('status', 'like', '1');
+        $pages_nav = Page::select('id', 'name', 'slug')->whereNavbar(true)->orderByDesc('id')->get();
+        $pages_footer = Page::select('id', 'name', 'slug')->whereFooter(true)->orderByDesc('id')->get();
+        $tags = Tag::whereHas('posts', function ($q) {
+            $q->where('status', true);
         })->get();
-        
+
         return view('layouts.blog', compact('categories', 'top_users', 'setting', 'pages_nav', 'pages_footer', 'tags'));
     }
 }
