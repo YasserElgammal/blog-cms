@@ -7,15 +7,9 @@ use Illuminate\Support\Facades\Route;
 
 class PostResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
-     */
     public function toArray($request)
     {
-        $routeShow = Route::currentRouteName() == 'post.show';
+        $routeShow = Route::currentRouteName() == 'posts.show';
 
         return [
             'id' => $this->id,
