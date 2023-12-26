@@ -11,13 +11,13 @@ class ApiPostController extends Controller
 {
     public function index()
     {
-        $posts = Post::with(['user', 'tags'])->whereStatus(true)->orderByDesc('id')->paginate(15);
-        return SimplePostResource::collection($posts);
+        $posts = Post::with(['user:id,name', 'category:id,name', 'tags:id,name'])->whereStatus(true)->orderByDesc('id')->paginate(15);
+        return PostResource::collection($posts);
     }
 
     public function show($id)
     {
-        $post = Post::with(['category', 'user', 'tags'])->whereId($id)->whereStatus(true)->firstOrFail();
+        $post = Post::with(['user:id,name', 'category:id,name', 'tags:id,name', 'comments.user'])->whereId($id)->whereStatus(true)->firstOrFail();
         return PostResource::make($post);
     }
 }

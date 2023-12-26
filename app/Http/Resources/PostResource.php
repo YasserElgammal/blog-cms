@@ -9,14 +9,18 @@ class PostResource extends JsonResource
 {
     public function toArray($request)
     {
-        $routeShow = Route::currentRouteName() == 'posts.show';
+        $routeShowPost = $request->routeIs('posts.show');
 
         return [
             'id' => $this->id,
             'title' => $this->title,
-            $this->mergeWhen($routeShow , ['content' => $this->content]),
             'image' => $this->image,
+            'slug' => $this->slug,
             'created_at' => $this->created_at,
+            $this->mergeWhen($routeShowPost, [
+                'content' => $this->content,
+                'comments' => CommentResource::collection($this->whenLoaded('comments'))
+            ]),
             'user' => UserResource::make($this->whenLoaded('user')),
             'category' => GeneralResource::make($this->whenLoaded('category')),
             'tags' => GeneralResource::collection($this->whenLoaded('tags')),

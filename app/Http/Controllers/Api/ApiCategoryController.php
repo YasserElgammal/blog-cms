@@ -11,8 +11,8 @@ class ApiCategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
-        return GeneralResource::collection($categories);
+        $categories = Category::paginate(15);
+        return CategoryResource::collection($categories);
     }
 
     public function show($id)
