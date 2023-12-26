@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Route;
 
 class PostResource extends JsonResource
 {
@@ -14,11 +15,12 @@ class PostResource extends JsonResource
      */
     public function toArray($request)
     {
-        // return parent::toArray($request);
+        $routeShow = Route::currentRouteName() == 'post.show';
+
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'content' => $this->content,
+            $this->mergeWhen($routeShow , ['content' => $this->content]),
             'image' => $this->image,
             'created_at' => $this->created_at,
             'user' => UserResource::make($this->whenLoaded('user')),
