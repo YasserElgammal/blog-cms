@@ -5,7 +5,7 @@ This is CMS Blog Build with Laravel, It has full control panel functionality wit
 [Recorded Video for the whole project](https://youtu.be/HUvpQ2WR9rg "Recorded Video for the whole project")
 
 ### What I use it this project
-- Laravel Framework 10,
+- Laravel Framework 11,
 - Tailwind for front and admin,
 - Laravel Policies,
 - Laravel Gates,
