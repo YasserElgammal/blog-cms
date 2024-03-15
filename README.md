@@ -69,7 +69,7 @@ GET | api/posts | Show All Posts
 GET | api/posts/{id} | Show Specific Post
 
 ## Requirements
-- PHP >= 8.1
+- PHP >= 8.2
 - MySQL or other database server
 - Composer
 - NodeJS
