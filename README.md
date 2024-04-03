@@ -4,7 +4,7 @@
 This is CMS Blog Build with Laravel, It has full control panel functionality with users roles.
 [Recorded Video for the whole project](https://youtu.be/HUvpQ2WR9rg "Recorded Video for the whole project")
 
-### What I use it this project
+### What I use in this project
 - Laravel Framework 11,
 - Tailwind for front and admin,
 - Laravel Policies,
@@ -85,7 +85,7 @@ GET | api/posts/{id} | Show Specific Post
 
 ## About Me
 
-Iam a Junior Backend Developer with one year of experience, I specialize in PHP, Laravel, and front-end technologies like TailwindCSS and Livewire. I have expertise in developing REST APIs and working with MySQL databases, and I am familiar with software architecture patterns such as MVC and HMVC. I am committed to producing clean, well-documented code that is easily maintainable, and I enjoy sharing my knowledge through various channels. I am eager to take on new challenges and continue to develop my skills.
+I am a Junior Backend Developer with one year of experience, I specialize in PHP, Laravel, and front-end technologies like TailwindCSS and Livewire. I have expertise in developing REST APIs and working with MySQL databases, and I am familiar with software architecture patterns such as MVC and HMVC. I am committed to producing clean, well-documented code that is easily maintainable, and I enjoy sharing my knowledge through various channels. I am eager to take on new challenges and continue to develop my skills.
 
 - [LinkedIn](https://www.linkedin.com/in/elgammal/).
 - [Youtube](https://www.youtube.com/@yasser.elgammal).
