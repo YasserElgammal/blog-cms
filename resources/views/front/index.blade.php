@@ -7,7 +7,7 @@
         @forelse ($posts as $post)
         <article class="flex flex-col shadow my-4">
             <a href="{{ route('post.show', $post->slug ) }}" class="hover:opacity-75">
-            <img src="{{ asset("storage/$post->image") }}" width="1000" height="500">
+            <img src="{{ $post->image }}" width="1000" height="500">
             </a>
             <div class="bg-white flex flex-col justify-start p-6">
                 <a href="{{ route('category.show', $post->category->slug) }} " class="text-blue-700 text-sm font-bold uppercase pb-4">{{ $post->category->name }}</a>

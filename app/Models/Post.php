@@ -34,6 +34,15 @@ class Post extends Model
         return static::wherecategoryId($this->category_id)->where('id', '<', $this->id)->published()->orderBy('id', 'desc')->first();
     }
 
+    public function getImageAttribute($value)
+    {
+        if (!$value) {
+            return asset('import/assets/post-pic-dummy.png');
+        }
+
+        return asset("storage/$value");
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);

@@ -20,7 +20,7 @@ class SettingFactory extends Factory
             'site_name' => fake()->word(),
             'contact_email' => fake()->email(),
             'description' => fake()->sentence(),
-            'about' => fake()->paragraph(),
+            'about' => fake()->paragraph(1),
             'copy_rights' => fake()->sentence(),
             'url_fb' => fake()->url(),
             'url_twitter' => fake()->url(),

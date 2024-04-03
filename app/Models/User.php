@@ -50,6 +50,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function getAvatarAttribute($value)
+    {
+        if (!$value) {
+            return asset('import/assets/profile-pic-dummy.png');
+        }
+
+        return asset("storage/$value");
+    }
+
     public function posts()
     {
         return $this->hasMany(Post::class);

@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('site_name')->nullable();
             $table->string('contact_email')->nullable();
-            $table->string('description')->nullable();
-            $table->string('about')->nullable();
+            $table->text('description')->nullable();
+            $table->text('about')->nullable();
             $table->string('copy_rights')->nullable();
             $table->string('url_fb')->nullable();
             $table->string('url_insta')->nullable();

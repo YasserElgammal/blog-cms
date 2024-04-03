@@ -31,7 +31,15 @@ class PostRequest extends FormRequest
             'slug' => ['required', Rule::unique('posts')->ignore($this?->post?->id)],
             'status' => ['required', 'boolean'],
             'image' => ['image', 'mimes:jpeg,png,jpg', 'max:2048', Rule::requiredIf(!$this?->post?->id)],
-            'tags' => ['exists:tags,id']
+            'tags' => ['exists:tags,id'],
+            'user_id' => ['required', 'exists:users,id']
         ];
+    }
+
+    public function prepareForValidation()
+    {
+        $this->merge([
+            'user_id' => auth()->id()
+        ]);
     }
 }

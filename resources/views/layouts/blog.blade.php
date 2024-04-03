@@ -171,13 +171,8 @@
                     </div>
                     @forelse ($top_users as $top)
                         <div class="my-1.5 py-3	px-4 flex justify-center rounded-lg shadow-lg bg-white w-full ">
-                            @if ($top->avatar == null)
-                                <img src="{{ asset('import/assets/profile-pic-dummy.png') }}"
-                                    class="w-10 h-10 rounded-full">
-                            @else
-                                <img class="w-10 h-10 rounded-full" src="{{ asset("storage/$top->avatar") }}"
+                                <img class="w-10 h-10 rounded-full" src="{{ $top->avatar }}"
                                     alt="">
-                            @endif
                             <div class="content flex justify-between py-2 w-full">
                                 <div class="px-2 justify-between">
                                     {{ $top->name }}

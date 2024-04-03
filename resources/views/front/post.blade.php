@@ -8,7 +8,7 @@
 
             <article class="flex flex-col shadow my-4">
                 <!-- Article Image -->
-                    <img src="{{ asset("storage/$post->image") }}" width="1000" height="500">
+                    <img src="{{ $post->image }}" width="1000" height="500">
                 <div class="bg-white flex flex-col justify-start p-6">
                     <a href="{{ route('category.show', $post->category->slug) }}"
                         class="text-blue-700 text-sm font-bold uppercase pb-4">{{ $post->category->name }}</a>
@@ -23,13 +23,8 @@
             {{-- author --}}
             <div class="w-full flex flex-col text-center md:text-left md:flex-row shadow bg-white mt-10 mb-10 p-6">
                 <div class="w-full md:w-1/5 flex justify-center md:justify-start pb-4">
-                    @if ($post->user->avatar == null)
-                        <img src="{{ asset('import/assets/profile-pic-dummy.png') }}"
+                        <img src="{{ $post->user->avatar }}"
                             class="rounded-full shadow h-32 w-32">
-                    @else
-                        <img src="{{ asset('storage') . '/' . $post->user->avatar }}"
-                            class="rounded-full shadow h-32 w-32">
-                    @endif
                 </div>
                 <div class="flex-1 flex flex-col justify-center md:justify-start">
                     <p class="font-semibold text-2xl">{{ $post->user->name }}</p>

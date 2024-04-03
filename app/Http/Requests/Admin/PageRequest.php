@@ -32,6 +32,14 @@ class PageRequest extends FormRequest
             'content' => ['required', 'min:10'],
             'navbar' => ['required', 'boolean'],
             'footer' => ['required', 'boolean'],
+            'user_id' => ['required', 'exists:users,id']
         ];
+    }
+
+    public function prepareForValidation()
+    {
+        $this->merge([
+            'user_id' => auth()->id()
+        ]);
     }
 }

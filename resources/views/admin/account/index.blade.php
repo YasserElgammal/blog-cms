@@ -15,14 +15,8 @@
                     <form method="POST" action="{{ route('admin.account.update', $user->id) }}" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-
-                        @if ($user->avatar == null)
-                            <img src="{{ asset('import/assets/profile-pic-dummy.png') }}"
+                            <img src="{{ $user->avatar }}"
                                 class="rounded-full shadow h-32 w-32">
-                        @else
-                            <img src="{{ asset('storage') . '/' . $user->avatar }}"
-                                class="rounded-full shadow h-32 w-32">
-                        @endif
                         <label class="ml-4 block text-sm text-gray-600" for="message">Choose Image: </label>
                         <input class="ml-2" type="file" id="myimage" name="avatar">
                 </div>

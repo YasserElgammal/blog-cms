@@ -154,11 +154,7 @@
             <div x-data="{ isOpen: false }" class="relative w-1/2 flex justify-end">
                 <button @click="isOpen = !isOpen"
                     class="realtive z-10 w-12 h-12 rounded-full overflow-hidden border-4 border-gray-400 hover:border-gray-300 focus:border-gray-300 focus:outline-none">
-                    @if ($user_avatar == null)
-                    <img src="{{ asset('import/assets/profile-pic-dummy.png') }}">
-                    @else
-                    <img src="{{ asset('storage') . '/' . $user_avatar }}">
-                    @endif
+                    <img src="{{ $user_avatar }}">
                 </button>
                 <button x-show="isOpen" @click="isOpen = false"
                     class="h-full w-full fixed inset-0 cursor-default"></button>
