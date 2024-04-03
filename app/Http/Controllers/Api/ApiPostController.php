@@ -15,13 +15,13 @@ class ApiPostController extends Controller
     {
         $posts = Post::with(['user:id,name', 'category:id,name', 'tags:id,name'])->whereStatus(true)->orderByDesc('id')->paginate(15);
 
-        return $this->retrieveReponse(data: PostResource::collection($posts));
+        return $this->retrieveResponse(data: PostResource::collection($posts));
     }
 
     public function show($id)
     {
         $post = Post::with(['user:id,name', 'category:id,name', 'tags:id,name', 'comments.user'])->whereId($id)->whereStatus(true)->firstOrFail();
 
-        return $this->retrieveReponse(data: PostResource::make($post));
+        return $this->retrieveResponse(data: PostResource::make($post));
     }
 }

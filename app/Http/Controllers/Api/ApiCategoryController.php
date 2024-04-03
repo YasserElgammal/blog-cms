@@ -15,13 +15,13 @@ class ApiCategoryController extends Controller
     {
         $categories = Category::paginate(15);
 
-        return $this->retrieveReponse(data: CategoryResource::collection($categories));
+        return $this->retrieveResponse(data: CategoryResource::collection($categories));
     }
 
     public function show($id)
     {
         $category = Category::with('posts')->whereId($id)->firstOrFail();
 
-        return $this->retrieveReponse(data: CategoryResource::make($category));
+        return $this->retrieveResponse(data: CategoryResource::make($category));
     }
 }
