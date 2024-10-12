@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Support\Facades\Storage;
 
 class Post extends Model
 {
@@ -15,7 +16,7 @@ class Post extends Model
     protected function createdAt(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => Carbon::parse($value)->diffForHumans()
+            get: fn($value) => Carbon::parse($value)->diffForHumans()
         );
     }
 
@@ -36,11 +37,7 @@ class Post extends Model
 
     public function getImageAttribute($value)
     {
-        if (!$value) {
-            return asset('import/assets/post-pic-dummy.png');
-        }
-
-        return asset("storage/$value");
+        return $value ? asset("storage/$value") : asset('import/assets/post-pic-dummy.png');
     }
 
     public function category()
@@ -64,5 +61,20 @@ class Post extends Model
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+        static::updating(function ($post) {
+            if ($post->isDirty('image') && !is_null($post->getRawOriginal('image'))) {
+                    Storage::delete($post->getRawOriginal('image'));
+            }
+        });
+        static::deleting(function ($post) {
+            if (!is_null($post->getRawOriginal('image'))) {
+                Storage::delete($post->getRawOriginal('image'));
+            }
+        });
     }
 }
