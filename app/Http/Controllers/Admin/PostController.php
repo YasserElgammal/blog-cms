@@ -94,7 +94,6 @@ class PostController extends Controller
         $post_data = $request->safe()->except('image');
 
         if ($request->hasfile('image')) {
-            Storage::delete($post->image);
             $get_file = $request->file('image')->store('images/posts');
             $post_data['image'] = $get_file;
         }
@@ -113,9 +112,6 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        if ($post->image != null) {
-            Storage::delete($post->image);
-        }
         $post->delete();
 
         return back()->with('message', trans('admin.post_deleted'));

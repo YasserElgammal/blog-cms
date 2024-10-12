@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -52,11 +53,7 @@ class User extends Authenticatable
 
     public function getAvatarAttribute($value)
     {
-        if (!$value) {
-            return asset('import/assets/profile-pic-dummy.png');
-        }
-
-        return asset("storage/$value");
+        return $value ? asset("storage/$value") : asset('import/assets/profile-pic-dummy.png');
     }
 
     public function posts()
@@ -87,5 +84,16 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+
+    public static function boot()
+    {
+        parent::boot();
+        static::updating(function ($user) {
+            if ($user->isDirty('avatar') && !is_null($user->getRawOriginal('avatar'))) {
+                Storage::delete($user->getRawOriginal('avatar'));
+            }
+        });
     }
 }

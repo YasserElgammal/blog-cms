@@ -21,11 +21,10 @@ class AccountController extends Controller
 
 
     /**
-     * Update the specified resource in storage.
+     * Update the authenticated user's account
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  \App\Http\Requests\Admin\UpdateAccountRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateAccountRequest $request)
     {
@@ -33,11 +32,8 @@ class AccountController extends Controller
         $data = $request->safe()->except('avatar');
 
         if ($request->hasfile('avatar')) {
-            if ($user->avatar != null) {
-                Storage::delete($user->avatar);
-            }
             $get_file = $request->file('avatar')->store('images/profiles');
-            $user->avatar = $get_file;
+            $data['avatar'] = $get_file;
         }
 
         $user->update($data);
