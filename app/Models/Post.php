@@ -68,7 +68,7 @@ class Post extends Model
         parent::boot();
         static::updating(function ($post) {
             if ($post->isDirty('image') && !is_null($post->getRawOriginal('image'))) {
-                    Storage::delete($post->getRawOriginal('image'));
+                Storage::delete($post->getRawOriginal('image'));
             }
         });
         static::deleting(function ($post) {
