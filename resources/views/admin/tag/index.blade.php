@@ -40,6 +40,7 @@
                         </tbody>
                     </table>
                 </div>
+                {!! $tags->links() !!}
         </main>
     </div>
 </x-admin-layout>

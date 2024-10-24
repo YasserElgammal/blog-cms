@@ -16,7 +16,8 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = Tag::with('posts')->get();
+        $tags = Tag::with('posts')->paginate(15);
+
         return view('admin.tag.index', compact('tags'));
     }
 
@@ -77,7 +78,7 @@ class TagController extends Controller
     public function destroy(Tag $tag)
     {
         $tag->delete();
-        
+
         return to_route('admin.tag.index')->with('message', 'Tag Deleted !');
     }
 }

@@ -18,7 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::with('role')->orderBy('id', 'desc')->paginate(15);
+        $users = User::with('role')->latest()->paginate(15);
 
         return view('admin.user.index', compact('users'));
     }
@@ -46,8 +46,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $validated = $request->validate(['role_id' => 'required|exists:roles,id']);
-        $user->role_id = $validated['role_id'];
-        $user->update();
+        $user->update($validated);
 
         return to_route('admin.user.index')->with('message', trans('admin.role_updated'));
     }

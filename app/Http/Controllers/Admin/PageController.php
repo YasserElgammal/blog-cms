@@ -15,7 +15,7 @@ class PageController extends Controller
 
     public function index()
     {
-        $pages = Page::with('user:id,name')->orderBy('id', 'desc')->paginate(15);
+        $pages = Page::with('user:id,name')->latest()->paginate(15);
 
         return view('admin.page.index', compact('pages'));
     }
