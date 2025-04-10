@@ -10,7 +10,7 @@ use App\Http\Controllers\Front\PageController as FrontPageController;
 use App\Http\Controllers\Front\TagController as FrontTagController;
 
 // FrontEnd Routes [Public routes]
-Route::get('/', [HomeController::class, 'index'])->name('webhome');
+Route::get('/', HomeController::class)->name('webhome');
 Route::post('/post/comment/{post}', [CommentController::class,'makeComment'])->name('post.comment');
 Route::resource('/comment', CommentController::class, ['only' => ['destroy']]);
 Route::get('/post/{slug}', [FrontPostController::class, 'getPostBySlug'])->name('post.show');

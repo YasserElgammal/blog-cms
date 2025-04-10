@@ -13,7 +13,7 @@ use App\Http\Controllers\Admin\UserController;
 
 Route::middleware(['auth', 'can:admin-login'])->name('admin.')->prefix('/admin')->group(function () {
     // This Roles can manage with Admin & Writers with specific policies.
-    Route::get('/', [AdminController::class, 'index'])->name('index');
+    Route::get('/', AdminController::class)->name('index');
     Route::get('/post/search', [PostController::class, 'search'])->name('post.search');
     Route::get('/post/slug-get', [PostController::class, 'getSlug'])->name('post.getslug');
     Route::resources([

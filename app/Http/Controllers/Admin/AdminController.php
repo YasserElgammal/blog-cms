@@ -10,7 +10,7 @@ use App\Models\User;
 
 class AdminController extends Controller
 {
-    public function index()
+    public function __invoke()
     {
         $categories = Category::count();
         $posts = Post::count();
